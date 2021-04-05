@@ -15,6 +15,7 @@
 		5DBAE98A261A27E800F16CCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DBAE988261A27E800F16CCB /* LaunchScreen.storyboard */; };
 		5DBAE995261A27E800F16CCB /* InstagramFirestoreTutorialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE994261A27E800F16CCB /* InstagramFirestoreTutorialTests.swift */; };
 		5DBAE9A0261A27E800F16CCB /* InstagramFirestoreTutorialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE99F261A27E800F16CCB /* InstagramFirestoreTutorialUITests.swift */; };
+		5DEEEDC2261B6FAB00672FBA /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEEEDC1261B6FAB00672FBA /* MainTabController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		5DBAE99B261A27E800F16CCB /* InstagramFirestoreTutorialUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstagramFirestoreTutorialUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DBAE99F261A27E800F16CCB /* InstagramFirestoreTutorialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramFirestoreTutorialUITests.swift; sourceTree = "<group>"; };
 		5DBAE9A1261A27E800F16CCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5DEEEDC1261B6FAB00672FBA /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 		5DBAE9B3261A280500F16CCB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5DEEEDC1261B6FAB00672FBA /* MainTabController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 			files = (
 				5DBAE982261A27E700F16CCB /* ViewController.swift in Sources */,
 				5DBAE97E261A27E700F16CCB /* AppDelegate.swift in Sources */,
+				5DEEEDC2261B6FAB00672FBA /* MainTabController.swift in Sources */,
 				5DBAE980261A27E700F16CCB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
