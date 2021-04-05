@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D7BC4ED261B73CB00426D53 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4EC261B73CB00426D53 /* FeedController.swift */; };
+		5D7BC4F2261B73E200426D53 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4F1261B73E200426D53 /* SearchController.swift */; };
+		5D7BC4F7261B73EB00426D53 /* ImageSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4F6261B73EB00426D53 /* ImageSelectorController.swift */; };
+		5D7BC4FC261B73FA00426D53 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4FB261B73FA00426D53 /* NotificationController.swift */; };
+		5D7BC501261B740700426D53 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC500261B740700426D53 /* ProfileController.swift */; };
 		5DBAE97E261A27E700F16CCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE97D261A27E700F16CCB /* AppDelegate.swift */; };
 		5DBAE980261A27E700F16CCB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE97F261A27E700F16CCB /* SceneDelegate.swift */; };
 		5DBAE982261A27E700F16CCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE981261A27E700F16CCB /* ViewController.swift */; };
@@ -36,6 +41,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D7BC4EC261B73CB00426D53 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
+		5D7BC4F1261B73E200426D53 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		5D7BC4F6261B73EB00426D53 /* ImageSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorController.swift; sourceTree = "<group>"; };
+		5D7BC4FB261B73FA00426D53 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		5D7BC500261B740700426D53 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		5DBAE97A261A27E700F16CCB /* InstagramFirestoreTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramFirestoreTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DBAE97D261A27E700F16CCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DBAE97F261A27E700F16CCB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +171,11 @@
 			isa = PBXGroup;
 			children = (
 				5DEEEDC1261B6FAB00672FBA /* MainTabController.swift */,
+				5D7BC4EC261B73CB00426D53 /* FeedController.swift */,
+				5D7BC4F1261B73E200426D53 /* SearchController.swift */,
+				5D7BC4F6261B73EB00426D53 /* ImageSelectorController.swift */,
+				5D7BC4FB261B73FA00426D53 /* NotificationController.swift */,
+				5D7BC500261B740700426D53 /* ProfileController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -310,7 +325,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DBAE982261A27E700F16CCB /* ViewController.swift in Sources */,
+				5D7BC4F7261B73EB00426D53 /* ImageSelectorController.swift in Sources */,
+				5D7BC4FC261B73FA00426D53 /* NotificationController.swift in Sources */,
+				5D7BC4F2261B73E200426D53 /* SearchController.swift in Sources */,
 				5DBAE97E261A27E700F16CCB /* AppDelegate.swift in Sources */,
+				5D7BC501261B740700426D53 /* ProfileController.swift in Sources */,
+				5D7BC4ED261B73CB00426D53 /* FeedController.swift in Sources */,
 				5DEEEDC2261B6FAB00672FBA /* MainTabController.swift in Sources */,
 				5DBAE980261A27E700F16CCB /* SceneDelegate.swift in Sources */,
 			);
