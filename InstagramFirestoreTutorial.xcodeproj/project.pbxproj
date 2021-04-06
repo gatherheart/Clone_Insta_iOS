@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,6 +24,10 @@
 		5DBAE9A0261A27E800F16CCB /* InstagramFirestoreTutorialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE99F261A27E800F16CCB /* InstagramFirestoreTutorialUITests.swift */; };
 		5DE8F9D6261C98A90097BE3E /* TabBarItemFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8F9D5261C98A90097BE3E /* TabBarItemFactory.swift */; };
 		5DE8F9DB261CAA330097BE3E /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8F9DA261CAA330097BE3E /* FeedCollectionViewCell.swift */; };
+		5DE8F9F6261CB80F0097BE3E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8F9F5261CB80F0097BE3E /* LoginController.swift */; };
+		5DE8F9FE261CB8260097BE3E /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8F9FD261CB8260097BE3E /* RegistrationController.swift */; };
+		5DE8FA03261CC82B0097BE3E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8FA02261CC82B0097BE3E /* CustomTextField.swift */; };
+		5DE8FA08261CCB770097BE3E /* ButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8FA07261CCB770097BE3E /* ButtonFactory.swift */; };
 		5DEEEDC2261B6FAB00672FBA /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEEEDC1261B6FAB00672FBA /* MainTabController.swift */; };
 		C79393B9C942873D74497030 /* Pods_InstagramFirestoreTutorial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42901193AA6C9F4EADD41137 /* Pods_InstagramFirestoreTutorial.framework */; };
 /* End PBXBuildFile section */
@@ -72,6 +76,10 @@
 		5DBAE9A1261A27E800F16CCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DE8F9D5261C98A90097BE3E /* TabBarItemFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemFactory.swift; sourceTree = "<group>"; };
 		5DE8F9DA261CAA330097BE3E /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		5DE8F9F5261CB80F0097BE3E /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		5DE8F9FD261CB8260097BE3E /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		5DE8FA02261CC82B0097BE3E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		5DE8FA07261CCB770097BE3E /* ButtonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFactory.swift; sourceTree = "<group>"; };
 		5DEEEDC1261B6FAB00672FBA /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		6423FA59F2DF69E6CEC0A008 /* Pods_InstagramFirestoreTutorial_InstagramFirestoreTutorialUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramFirestoreTutorial_InstagramFirestoreTutorialUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A84AB5D603CF2AE52BA9884 /* Pods-InstagramFirestoreTutorialTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramFirestoreTutorialTests.debug.xcconfig"; path = "Target Support Files/Pods-InstagramFirestoreTutorialTests/Pods-InstagramFirestoreTutorialTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -117,7 +125,6 @@
 				6A84AB5D603CF2AE52BA9884 /* Pods-InstagramFirestoreTutorialTests.debug.xcconfig */,
 				5A5FF152509C38D5BD936815 /* Pods-InstagramFirestoreTutorialTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -193,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				5DE8F9DA261CAA330097BE3E /* FeedCollectionViewCell.swift */,
+				5DE8FA02261CC82B0097BE3E /* CustomTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -207,6 +215,7 @@
 		5DBAE9B3261A280500F16CCB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5DE8F9F4261CB7FF0097BE3E /* Authentication */,
 				5DEEEDC1261B6FAB00672FBA /* MainTabController.swift */,
 				5D7BC4EC261B73CB00426D53 /* FeedController.swift */,
 				5D7BC4F1261B73E200426D53 /* SearchController.swift */,
@@ -235,8 +244,18 @@
 			isa = PBXGroup;
 			children = (
 				5DE8F9D5261C98A90097BE3E /* TabBarItemFactory.swift */,
+				5DE8FA07261CCB770097BE3E /* ButtonFactory.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		5DE8F9F4261CB7FF0097BE3E /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				5DE8F9F5261CB80F0097BE3E /* LoginController.swift */,
+				5DE8F9FD261CB8260097BE3E /* RegistrationController.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		C44C5A570750DB588D2D66C1 /* Frameworks */ = {
@@ -487,10 +506,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DE8FA03261CC82B0097BE3E /* CustomTextField.swift in Sources */,
 				5DBAE982261A27E700F16CCB /* ViewController.swift in Sources */,
+				5DE8F9F6261CB80F0097BE3E /* LoginController.swift in Sources */,
 				5D7BC4F7261B73EB00426D53 /* ImageSelectorController.swift in Sources */,
 				5DE8F9DB261CAA330097BE3E /* FeedCollectionViewCell.swift in Sources */,
 				5D7BC4FC261B73FA00426D53 /* NotificationController.swift in Sources */,
+				5DE8FA08261CCB770097BE3E /* ButtonFactory.swift in Sources */,
 				5D7BC4F2261B73E200426D53 /* SearchController.swift in Sources */,
 				5DBAE97E261A27E700F16CCB /* AppDelegate.swift in Sources */,
 				5D7BC501261B740700426D53 /* ProfileController.swift in Sources */,
@@ -498,6 +520,7 @@
 				5DEEEDC2261B6FAB00672FBA /* MainTabController.swift in Sources */,
 				5DBAE980261A27E700F16CCB /* SceneDelegate.swift in Sources */,
 				5DE8F9D6261C98A90097BE3E /* TabBarItemFactory.swift in Sources */,
+				5DE8F9FE261CB8260097BE3E /* RegistrationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
