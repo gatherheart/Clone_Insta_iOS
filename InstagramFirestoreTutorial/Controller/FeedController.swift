@@ -7,29 +7,55 @@
 
 import UIKit
 
-class FeedController: UICollectionViewController {
+class FeedController: UIViewController {
     
-    private let reuseIdentifier: String = "Cell"
-    private let layout = UICollectionViewFlowLayout()
+    private let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 10
+        layout.scrollDirection = .vertical
+        layout.sectionInset = .zero
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return cv
+    }()
 
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .green
+    }
+    
+    private func commonInit() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
         setCollectionView()
     }
     
     private func setCollectionView() {
+        collectionView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         collectionView.backgroundColor = .white
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(FeedCollectionViewCell.self, forCellWithReuseIdentifier: FeedCollectionViewCell.reuseIdentifier)
+        self.view.addSubview(collectionView)
     }
 }
 
-extension FeedController {
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension FeedController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCollectionViewCell.reuseIdentifier, for: indexPath) as? FeedCollectionViewCell else {
+            return UICollectionViewCell()
+        }
         cell.backgroundColor = .red
         return cell
     }
