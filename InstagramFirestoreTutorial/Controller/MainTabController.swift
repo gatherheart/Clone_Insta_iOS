@@ -30,14 +30,3 @@ class MainTabController: UITabBarController {
     }
     
 }
-
-class TabBarItemFactory {
-    
-    static func item(unselectedImage: UIImage, selectedImage: UIImage, rootViewController: UIViewController.Type) -> UINavigationController {
-        let nav = UINavigationController(rootViewController: rootViewController.init())
-        nav.tabBarItem.image = unselectedImage
-        nav.tabBarItem.selectedImage = selectedImage
-        return nav
-    }
-    
-}

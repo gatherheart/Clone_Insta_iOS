@@ -20,6 +20,7 @@
 		5DBAE98A261A27E800F16CCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DBAE988261A27E800F16CCB /* LaunchScreen.storyboard */; };
 		5DBAE995261A27E800F16CCB /* InstagramFirestoreTutorialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE994261A27E800F16CCB /* InstagramFirestoreTutorialTests.swift */; };
 		5DBAE9A0261A27E800F16CCB /* InstagramFirestoreTutorialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE99F261A27E800F16CCB /* InstagramFirestoreTutorialUITests.swift */; };
+		5DE8F9D6261C98A90097BE3E /* TabBarItemFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8F9D5261C98A90097BE3E /* TabBarItemFactory.swift */; };
 		5DEEEDC2261B6FAB00672FBA /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DEEEDC1261B6FAB00672FBA /* MainTabController.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		5DBAE99B261A27E800F16CCB /* InstagramFirestoreTutorialUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstagramFirestoreTutorialUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DBAE99F261A27E800F16CCB /* InstagramFirestoreTutorialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramFirestoreTutorialUITests.swift; sourceTree = "<group>"; };
 		5DBAE9A1261A27E800F16CCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5DE8F9D5261C98A90097BE3E /* TabBarItemFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemFactory.swift; sourceTree = "<group>"; };
 		5DEEEDC1261B6FAB00672FBA /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 		5DBAE97C261A27E700F16CCB /* InstagramFirestoreTutorial */ = {
 			isa = PBXGroup;
 			children = (
+				5DE8F9D3261C98580097BE3E /* Helper */,
 				5DBAE9B5261A281300F16CCB /* Utils */,
 				5DBAE9B4261A280D00F16CCB /* API */,
 				5DBAE9B3261A280500F16CCB /* Controller */,
@@ -192,6 +195,14 @@
 			children = (
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		5DE8F9D3261C98580097BE3E /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				5DE8F9D5261C98A90097BE3E /* TabBarItemFactory.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,6 +344,7 @@
 				5D7BC4ED261B73CB00426D53 /* FeedController.swift in Sources */,
 				5DEEEDC2261B6FAB00672FBA /* MainTabController.swift in Sources */,
 				5DBAE980261A27E700F16CCB /* SceneDelegate.swift in Sources */,
+				5DE8F9D6261C98A90097BE3E /* TabBarItemFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
