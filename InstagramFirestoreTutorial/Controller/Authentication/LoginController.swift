@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class LoginController: UIViewController {
+    
+    private var viewModel:LoginViewModel = LoginViewModel()
     private var stackView: UIStackView!
     private let icon: UIImageView = {
         let iv = UIImageView(image: #imageLiteral(resourceName: "Instagram_logo_white"))
@@ -28,15 +30,18 @@ class LoginController: UIViewController {
     private let login: UIButton = {
         let bt = UIButton(type: .system)
         bt.setTitle("LogIn", for: .normal)
-        bt.setTitleColor(.white, for: .normal)
-        bt.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        bt.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .normal)
+        bt.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.5)
         bt.layer.cornerRadius = 5
         bt.clipsToBounds = true
         bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        bt.isEnabled = false
         return bt
     }()
     private let singUp: UIButton = {
-        return ButtonFactory.button(first: "Don't have an account?  ", second: "Sign up")
+        let button =  ButtonFactory.button(first: "Don't have an account?  ", second: "Sign up")
+        button.addTarget(self, action: #selector(goToSignUp(_:)), for: .touchUpInside)
+        return button
     }()
     private let forgotPassword: UIButton = {
         return ButtonFactory.button(first: "Forget your password?  ", second: "Get help signing in.")
@@ -62,12 +67,9 @@ class LoginController: UIViewController {
         setForgotPassword()
     }
     
-    private func setGradient() {
-        let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor]
-        gradient.locations = [0, 1]
-        view.layer.addSublayer(gradient)
-        gradient.frame = view.frame
+    private func setGradient(){
+        let bg = BackgroundFactory.background(frame: self.view.frame, colors: [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor], locations: [0, 1])
+        self.view.layer.addSublayer(bg)
     }
     
     private func setIcon() {
@@ -107,6 +109,10 @@ class LoginController: UIViewController {
             make.left.equalTo(self.view.snp.left).offset(32)
             make.right.equalTo(self.view.snp.right).offset(-32)
         }
+        
+        email.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
+        password.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
+
     }
     
     private func setSignUp() {
@@ -125,5 +131,25 @@ class LoginController: UIViewController {
             make.centerX.equalTo(self.view.snp.centerX)
             make.top.equalTo(stackView.snp.bottom).offset(4)
         }
+    }
+    
+    @objc
+    private func goToSignUp(_ sender: UIButton) {
+        let vc = RegistrationController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func textDidChange(_ sender: UITextField) {
+        switch sender {
+        case email:
+            viewModel.email = sender.text
+        case password:
+            viewModel.password = sender.text
+        default:
+            break
+        }
+        login.isEnabled = viewModel.formIsValid
+        login.backgroundColor = viewModel.backgroundColor
+        login.setTitleColor(viewModel.buttonTitleColor, for: .normal)
     }
 }
