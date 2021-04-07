@@ -91,12 +91,6 @@ class FeedCollectionViewCell: UICollectionViewCell {
     
     private func setUI() {
         backgroundColor = .white
-        self.contentView.addSubview(profileImage)
-        self.contentView.addSubview(username)
-        self.contentView.addSubview(postImage)
-        self.contentView.addSubview(likesLabel)
-        self.contentView.addSubview(captionLabel)
-        self.contentView.addSubview(postTimeLabel)
         setProfileImageView()
         setUsernameButton()
         setPostImage()
@@ -107,6 +101,7 @@ class FeedCollectionViewCell: UICollectionViewCell {
     }
     
     private func setProfileImageView() {
+        self.contentView.addSubview(profileImage)
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         profileImage.snp.makeConstraints { make in
             make.width.height.equalTo(40)
@@ -118,6 +113,7 @@ class FeedCollectionViewCell: UICollectionViewCell {
     }
     
     private func setUsernameButton() {
+        self.contentView.addSubview(username)
         username.translatesAutoresizingMaskIntoConstraints = false
         username.snp.makeConstraints { make in
             make.centerY.equalTo(profileImage.snp.centerY)
@@ -126,6 +122,7 @@ class FeedCollectionViewCell: UICollectionViewCell {
     }
     
     private func setPostImage() {
+        self.contentView.addSubview(postImage)
         postImage.translatesAutoresizingMaskIntoConstraints = false
         postImage.snp.makeConstraints { make in
             make.top.equalTo(profileImage.snp.bottom).offset(8)
@@ -136,6 +133,7 @@ class FeedCollectionViewCell: UICollectionViewCell {
     }
     
     private func setLikesLabel() {
+        self.contentView.addSubview(likesLabel)
         likesLabel.snp.makeConstraints { make in
             make.top.equalTo(like.snp.bottom).offset(-4)
             make.left.equalTo(self.contentView.snp.left).offset(8)
@@ -143,6 +141,7 @@ class FeedCollectionViewCell: UICollectionViewCell {
     }
     
     private func setCaptionLabel() {
+        self.contentView.addSubview(captionLabel)
         captionLabel.snp.makeConstraints { make in
             make.top.equalTo(likesLabel.snp.bottom).offset(8)
             make.left.equalTo(self.contentView.snp.left).offset(8)
@@ -150,6 +149,7 @@ class FeedCollectionViewCell: UICollectionViewCell {
     }
     
     private func setPostTimeLabel() {
+        self.contentView.addSubview(postTimeLabel)
         postTimeLabel.snp.makeConstraints { make in
             make.top.equalTo(captionLabel.snp.bottom).offset(8)
             make.left.equalTo(self.contentView.snp.left).offset(8)

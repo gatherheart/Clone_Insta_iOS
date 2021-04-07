@@ -18,7 +18,6 @@ class MainTabController: UITabBarController {
     
 
     // MARK: - Helpers
-    
     func configureViewController() {
         let feed = TabBarItemFactory.item(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected"), rootViewController: FeedController.self)
         let search = TabBarItemFactory.item(unselectedImage: #imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected"), rootViewController: SearchController.self)

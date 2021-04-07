@@ -18,7 +18,7 @@ extension ButtonMakable {
     }
 }
 
-class ButtonFactory {
+class ButtonFactory: ButtonMakable {
     static func button(first: String, second: String) -> UIButton {
         let button = UIButton(type: .system)
         let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.7), .font: UIFont.systemFont(ofSize: 16)]

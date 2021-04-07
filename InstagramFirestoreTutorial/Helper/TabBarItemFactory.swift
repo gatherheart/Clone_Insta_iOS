@@ -9,7 +9,6 @@ import UIKit
 
 protocol TabBarItemMakable {
     static func item(unselectedImage: UIImage, selectedImage: UIImage, rootViewController: UIViewController.Type) -> UINavigationController
-
 }
 
 class TabBarItemFactory: TabBarItemMakable {
