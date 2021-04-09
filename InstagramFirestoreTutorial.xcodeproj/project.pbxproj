@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2AE1CB0735060533C2B83391 /* Pods_InstagramFirestoreTutorialTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A155A17A2FCA52AFB7FA6C1 /* Pods_InstagramFirestoreTutorialTests.framework */; };
 		2C3C1A57449BF4179028089B /* Pods_InstagramFirestoreTutorial_InstagramFirestoreTutorialUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423FA59F2DF69E6CEC0A008 /* Pods_InstagramFirestoreTutorial_InstagramFirestoreTutorialUITests.framework */; };
+		5D02E29E26209B3F00551F66 /* LoginViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02E29D26209B3F00551F66 /* LoginViewPresenter.swift */; };
 		5D7BC4ED261B73CB00426D53 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4EC261B73CB00426D53 /* FeedController.swift */; };
 		5D7BC4F2261B73E200426D53 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4F1261B73E200426D53 /* SearchController.swift */; };
 		5D7BC4F7261B73EB00426D53 /* ImageSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4F6261B73EB00426D53 /* ImageSelectorController.swift */; };
@@ -57,6 +58,7 @@
 		3A155A17A2FCA52AFB7FA6C1 /* Pods_InstagramFirestoreTutorialTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramFirestoreTutorialTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42901193AA6C9F4EADD41137 /* Pods_InstagramFirestoreTutorial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramFirestoreTutorial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A5FF152509C38D5BD936815 /* Pods-InstagramFirestoreTutorialTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramFirestoreTutorialTests.release.xcconfig"; path = "Target Support Files/Pods-InstagramFirestoreTutorialTests/Pods-InstagramFirestoreTutorialTests.release.xcconfig"; sourceTree = "<group>"; };
+		5D02E29D26209B3F00551F66 /* LoginViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewPresenter.swift; sourceTree = "<group>"; };
 		5D7BC4EC261B73CB00426D53 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
 		5D7BC4F1261B73E200426D53 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		5D7BC4F6261B73EB00426D53 /* ImageSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorController.swift; sourceTree = "<group>"; };
@@ -132,6 +134,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5D02E29C26209B2B00551F66 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				5D02E29D26209B3F00551F66 /* LoginViewPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		5DBAE971261A27E700F16CCB = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +170,7 @@
 				5DE8F9D3261C98580097BE3E /* Helper */,
 				5DBAE9B5261A281300F16CCB /* Extensions */,
 				5DBAE9B4261A280D00F16CCB /* API */,
+				5D02E29C26209B2B00551F66 /* Presenter */,
 				5DBAE9B3261A280500F16CCB /* Controller */,
 				5DBAE9B2261A280000F16CCB /* ViewModel */,
 				5DBAE9B1261A27FA00F16CCB /* View */,
@@ -527,6 +538,7 @@
 				5D7BC4ED261B73CB00426D53 /* FeedController.swift in Sources */,
 				5DEEEDC2261B6FAB00672FBA /* MainTabController.swift in Sources */,
 				5DBAE980261A27E700F16CCB /* SceneDelegate.swift in Sources */,
+				5D02E29E26209B3F00551F66 /* LoginViewPresenter.swift in Sources */,
 				5DE8F9D6261C98A90097BE3E /* TabBarItemFactory.swift in Sources */,
 				5DE8F9FE261CB8260097BE3E /* RegistrationController.swift in Sources */,
 			);
