@@ -11,8 +11,7 @@ import SnapKit
 class LoginController: UIViewController {
     
     private var viewModel:LoginViewModel = LoginViewModel()
-    private var stackView: UIStackView!
-    private var loginViewPresenter: LoginViewPresenter!
+    private var loginViewPresenter: LoginViewPresentable!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -28,7 +27,7 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         setNavigationBar()
         addTarget()
-        loginViewPresenter.setUI()
+        loginViewPresenter.present()
     }
     
     private func setNavigationBar() {

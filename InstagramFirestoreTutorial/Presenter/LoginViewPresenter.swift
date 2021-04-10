@@ -7,7 +7,18 @@
 
 import UIKit
 
-class LoginViewPresenter {
+protocol LoginViewPresentable {
+    var stackView: UIStackView! { get }
+    var icon: UIImageView { get }
+    var email: UITextField { get }
+    var password: UITextField { get }
+    var login: UIButton { get }
+    var signUp: UIButton { get }
+    var forgotPassword: UIButton { get }
+    func present()
+}
+
+class LoginViewPresenter: LoginViewPresentable {
     
     let viewController: UIViewController!
     
@@ -15,12 +26,16 @@ class LoginViewPresenter {
         self.viewController = sender
     }
     
-    private var stackView: UIStackView!
-    private let icon: UIImageView = {
+    // MARK: - UI Components
+
+    private(set) var stackView: UIStackView!
+    
+    let icon: UIImageView = {
         let iv = UIImageView(image: #imageLiteral(resourceName: "Instagram_logo_white"))
         iv.contentMode = .scaleAspectFill
         return iv
     }()
+    
     private(set) var email: UITextField = {
         let tf = CustomTextField(placeholder: "Email")
         tf.keyboardType = .emailAddress
@@ -49,25 +64,27 @@ class LoginViewPresenter {
         return button
     }()
     
-    private let forgotPassword: UIButton = {
+    let forgotPassword: UIButton = {
         return ButtonFactory.button(first: "Forget your password?  ", second: "Get help signing in.")
     }()
     
-    func setUI() {
+    // MARK: - Presentation
+    
+    func present() {
         viewController.view.backgroundColor = .white
-        setGradient()
-        setIcon()
-        setLoginStackView()
-        setSignUp()
-        setForgotPassword()
+        presentGradient()
+        presentIcon()
+        presentLoginStack()
+        presentSignUp()
+        presentForgotPassword()
     }
     
-    private func setGradient(){
+    private func presentGradient(){
         let bg = BackgroundFactory.background(frame: viewController.view.frame, colors: [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor], locations: [0, 1])
         viewController.view.layer.addSublayer(bg)
     }
     
-    private func setIcon() {
+    private func presentIcon() {
         viewController.view.addSubview(icon)
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.snp.makeConstraints { make in
@@ -78,7 +95,7 @@ class LoginViewPresenter {
         }
     }
     
-    private func setLoginStackView() {
+    private func presentLoginStack() {
         
         viewController.view.addSubview(email)
         viewController.view.addSubview(password)
@@ -106,7 +123,7 @@ class LoginViewPresenter {
         }
     }
     
-    private func setSignUp() {
+    private func presentSignUp() {
         viewController.view.addSubview(self.signUp)
         self.signUp.translatesAutoresizingMaskIntoConstraints = false
         self.signUp.snp.makeConstraints { make in
@@ -115,7 +132,7 @@ class LoginViewPresenter {
         }
     }
     
-    private func setForgotPassword() {
+    private func presentForgotPassword() {
         viewController.view.addSubview(forgotPassword)
         forgotPassword.translatesAutoresizingMaskIntoConstraints = false
         forgotPassword.snp.makeConstraints { make in
