@@ -26,6 +26,7 @@
 		5DBAE9A0261A27E800F16CCB /* InstagramFirestoreTutorialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE99F261A27E800F16CCB /* InstagramFirestoreTutorialUITests.swift */; };
 		5DC065B9261D8D6500397954 /* BackgroundFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC065B8261D8D6500397954 /* BackgroundFactory.swift */; };
 		5DC065BE261D9A5900397954 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC065BD261D9A5900397954 /* AuthenticationViewModel.swift */; };
+		5DCEE9CD2624889F00B220F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DCEE9CC2624889F00B220F6 /* GoogleService-Info.plist */; };
 		5DE8F9D6261C98A90097BE3E /* TabBarItemFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8F9D5261C98A90097BE3E /* TabBarItemFactory.swift */; };
 		5DE8F9DB261CAA330097BE3E /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8F9DA261CAA330097BE3E /* FeedCollectionViewCell.swift */; };
 		5DE8F9F6261CB80F0097BE3E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8F9F5261CB80F0097BE3E /* LoginController.swift */; };
@@ -82,6 +83,7 @@
 		5DBAE9A1261A27E800F16CCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DC065B8261D8D6500397954 /* BackgroundFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFactory.swift; sourceTree = "<group>"; };
 		5DC065BD261D9A5900397954 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		5DCEE9CC2624889F00B220F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5DE8F9D5261C98A90097BE3E /* TabBarItemFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemFactory.swift; sourceTree = "<group>"; };
 		5DE8F9DA261CAA330097BE3E /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		5DE8F9F5261CB80F0097BE3E /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				5DBAE986261A27E800F16CCB /* Assets.xcassets */,
 				5DBAE988261A27E800F16CCB /* LaunchScreen.storyboard */,
 				5DBAE98B261A27E800F16CCB /* Info.plist */,
+				5DCEE9CC2624889F00B220F6 /* GoogleService-Info.plist */,
 			);
 			path = InstagramFirestoreTutorial;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DBAE98A261A27E800F16CCB /* LaunchScreen.storyboard in Resources */,
+				5DCEE9CD2624889F00B220F6 /* GoogleService-Info.plist in Resources */,
 				5DBAE987261A27E800F16CCB /* Assets.xcassets in Resources */,
 				5DBAE985261A27E700F16CCB /* Main.storyboard in Resources */,
 			);

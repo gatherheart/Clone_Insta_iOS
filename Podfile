@@ -7,6 +7,17 @@ target 'InstagramFirestoreTutorial' do
   
   # Pods for InstagramFirestoreTutorial
   pod 'SnapKit', '~> 5.0.0'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Storage'
+  pod 'ActiveLabel'
+  pod 'SDWebImage','~>4.4.2'
+  pod 'JGProgressHUD','~>2.0.3'
+  pod 'YPImagePicker'
 
   target 'InstagramFirestoreTutorialTests' do
     inherit! :search_paths
