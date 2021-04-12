@@ -27,6 +27,11 @@
 		5DC065B9261D8D6500397954 /* BackgroundFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC065B8261D8D6500397954 /* BackgroundFactory.swift */; };
 		5DC065BE261D9A5900397954 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC065BD261D9A5900397954 /* AuthenticationViewModel.swift */; };
 		5DCEE9CD2624889F00B220F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DCEE9CC2624889F00B220F6 /* GoogleService-Info.plist */; };
+		5DCEEA3B262493C700B220F6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCEEA3A262493C700B220F6 /* NetworkManager.swift */; };
+		5DCEEA43262498C100B220F6 /* AuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCEEA42262498C100B220F6 /* AuthRequest.swift */; };
+		5DCEEA482624991C00B220F6 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCEEA472624991C00B220F6 /* AuthModel.swift */; };
+		5DCEEA5026249E5A00B220F6 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCEEA4F26249E5A00B220F6 /* FirestoreManager.swift */; };
+		5DCEEA5526249F2300B220F6 /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCEEA5426249F2300B220F6 /* AuthUseCase.swift */; };
 		5DE8F9D6261C98A90097BE3E /* TabBarItemFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8F9D5261C98A90097BE3E /* TabBarItemFactory.swift */; };
 		5DE8F9DB261CAA330097BE3E /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8F9DA261CAA330097BE3E /* FeedCollectionViewCell.swift */; };
 		5DE8F9F6261CB80F0097BE3E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8F9F5261CB80F0097BE3E /* LoginController.swift */; };
@@ -84,6 +89,11 @@
 		5DC065B8261D8D6500397954 /* BackgroundFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFactory.swift; sourceTree = "<group>"; };
 		5DC065BD261D9A5900397954 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		5DCEE9CC2624889F00B220F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5DCEEA3A262493C700B220F6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		5DCEEA42262498C100B220F6 /* AuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequest.swift; sourceTree = "<group>"; };
+		5DCEEA472624991C00B220F6 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
+		5DCEEA4F26249E5A00B220F6 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		5DCEEA5426249F2300B220F6 /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
 		5DE8F9D5261C98A90097BE3E /* TabBarItemFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemFactory.swift; sourceTree = "<group>"; };
 		5DE8F9DA261CAA330097BE3E /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		5DE8F9F5261CB80F0097BE3E /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -213,6 +223,7 @@
 		5DBAE9B0261A27F300F16CCB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5DCEEA472624991C00B220F6 /* AuthModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -251,6 +262,9 @@
 		5DBAE9B4261A280D00F16CCB /* API */ = {
 			isa = PBXGroup;
 			children = (
+				5DCEEA3A262493C700B220F6 /* NetworkManager.swift */,
+				5DCEEA42262498C100B220F6 /* AuthRequest.swift */,
+				5DCEEA4F26249E5A00B220F6 /* FirestoreManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -268,6 +282,7 @@
 				5DE8F9D5261C98A90097BE3E /* TabBarItemFactory.swift */,
 				5DE8FA07261CCB770097BE3E /* ButtonFactory.swift */,
 				5DC065B8261D8D6500397954 /* BackgroundFactory.swift */,
+				5DCEEA5426249F2300B220F6 /* AuthUseCase.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -530,17 +545,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DCEEA5026249E5A00B220F6 /* FirestoreManager.swift in Sources */,
 				5DE8FA03261CC82B0097BE3E /* CustomTextField.swift in Sources */,
 				5DBAE982261A27E700F16CCB /* ViewController.swift in Sources */,
 				5DC065BE261D9A5900397954 /* AuthenticationViewModel.swift in Sources */,
 				5DE8F9F6261CB80F0097BE3E /* LoginController.swift in Sources */,
 				5D4CF092262173FE009C33EC /* RegistrationViewPresenter.swift in Sources */,
 				5D7BC4F7261B73EB00426D53 /* ImageSelectorController.swift in Sources */,
+				5DCEEA5526249F2300B220F6 /* AuthUseCase.swift in Sources */,
 				5DE8F9DB261CAA330097BE3E /* FeedCollectionViewCell.swift in Sources */,
+				5DCEEA3B262493C700B220F6 /* NetworkManager.swift in Sources */,
 				5D7BC4FC261B73FA00426D53 /* NotificationController.swift in Sources */,
 				5DE8FA08261CCB770097BE3E /* ButtonFactory.swift in Sources */,
 				5D7BC4F2261B73E200426D53 /* SearchController.swift in Sources */,
 				5DBAE97E261A27E700F16CCB /* AppDelegate.swift in Sources */,
+				5DCEEA43262498C100B220F6 /* AuthRequest.swift in Sources */,
 				5D7BC501261B740700426D53 /* ProfileController.swift in Sources */,
 				5DC065B9261D8D6500397954 /* BackgroundFactory.swift in Sources */,
 				5D7BC4ED261B73CB00426D53 /* FeedController.swift in Sources */,
@@ -549,6 +568,7 @@
 				5D02E29E26209B3F00551F66 /* LoginViewPresenter.swift in Sources */,
 				5DE8F9D6261C98A90097BE3E /* TabBarItemFactory.swift in Sources */,
 				5DE8F9FE261CB8260097BE3E /* RegistrationController.swift in Sources */,
+				5DCEEA482624991C00B220F6 /* AuthModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

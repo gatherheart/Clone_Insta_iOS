@@ -8,10 +8,18 @@
 import Foundation
 
 struct AuthUseCase {
-    static func auth(with: AuthCredentials, firestoreManger: FirestoreManager) {
+    static func register(with: AuthCredentials, firestoreManger: FirestoreManager, completion: @escaping (Result<Int, Error>) -> Void) {
         guard let imageData = with.profileImage.jpegData(compressionQuality: 0.90) else { return }
-        firestoreManger.upload(data: image) { (metaData, error) in
-            print(metaData)
+        do {
+            try firestoreManger.upload(data: imageData) { (metaData, error) in
+                print(metaData)
+                completion(.success(0))
+            }
+        } catch {
+            //TODO: ERROR HANDLE
+            print("ERROR HANDLE")
+            completion(.failure(error))
         }
+        
     }
 }

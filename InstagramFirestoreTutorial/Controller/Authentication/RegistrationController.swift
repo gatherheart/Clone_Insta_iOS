@@ -35,6 +35,7 @@ class RegistrationController: UIViewController {
             guard let textField = $0 as? UITextField else { return }
             textField.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
         }
+        registrationViewPresenter.signUp.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
     }
     
     @objc
@@ -64,6 +65,27 @@ class RegistrationController: UIViewController {
         registrationViewPresenter.signUp.setTitleColor(viewModel.buttonTitleColor, for: .normal)
     }
     
+    @objc
+    func handleSignUp() {
+        guard let email = registrationViewPresenter.email.text else { return }
+        guard let password = registrationViewPresenter.password.text else { return }
+        guard let fullname = registrationViewPresenter.fullname.text else { return }
+        guard let username = registrationViewPresenter.username.text?.lowercased() else { return }
+        guard let profileImage = registrationViewPresenter.plusPhoto.imageView?.image else { return }
+        
+        let credentials = AuthCredentials(email: email, password: password,
+                                          fullname: fullname, username: username,
+                                          profileImage: profileImage)
+        AuthUseCase.register(with: credentials, firestoreManger: FirestoreManager()) { result in
+            switch result {
+            case .success(let code):
+                print(code)
+                print("DEBUG: Successfully registered user")
+            case .failure(let error):
+                print("DEBUG: Failed to register user \(error.localizedDescription)")
+            }
+        }
+    }
     @objc
     private func goToLogin() {
         navigationController?.popViewController(animated: true)
