@@ -8,36 +8,40 @@
 import Foundation
 import FirebaseFirestore
 
+typealias UserType = [String: Any]
+
 struct AuthUseCase {
-    static func register(with: AuthCredentials, firestoreManger: FirestoreManager, completion: @escaping (Result<Int, Error>) -> Void) {
-        guard let imageData = with.profileImage.jpegData(compressionQuality: 0.90) else { return }
-        do {
-            try firestoreManger.upload(data: imageData) { (metaData, error) in
-                print(metaData)
-                AuthRequest.register(with: with) { (result) in
-                    switch result {
-                    case .success(let uid):
-                        let data: [String: Any] = ["email": with.email,
-                                                   "fullname": with.fullname,
-                                                   "profileImageUrl": "",
-                                                   "uid": uid,
-                                                   "username": with.username]
-                        print(data)
-                        Firestore.firestore().collection("users").document(uid).setData(data) { _ in
-                        }
-                    case .failure(let error):
-                        print(error)
-                    case .none:
-                        print("")
-                    }
+    static func register(with: AuthCredentials, firestoreManger: FirestoreManable, completion: @escaping (Result<UserType, Error>) -> Void) {
+        ImageUploader.upload(image: with.profileImage, firestoreManger: firestoreManger) { result in
+            
+            switch result {
+            case .success(let imageUrl):
+                requestRegistration(with: with, imageUrl: imageUrl) { user, error in
+                    completion(.success(user!))
                 }
-                completion(.success(0))
+            case .failure(let error):
+                completion(.failure(error))
             }
-        } catch {
-            //TODO: ERROR HANDLE
-            print("ERROR HANDLE")
-            completion(.failure(error))
         }
-        
+    }
+    
+    private static func requestRegistration(with: AuthCredentials, imageUrl: String, completion: @escaping (UserType?, Error?) -> Void) {
+        AuthRequest.register(with: with) { (result) in
+            switch result {
+            case .success(let uid):
+                let data: [String: Any] = ["email": with.email,
+                                           "fullname": with.fullname,
+                                           "profileImageUrl": imageUrl,
+                                           "uid": uid,
+                                           "username": with.username]
+                Firestore.firestore().collection("users").document(uid).setData(data) { _ in
+                    completion(data, nil)
+                }
+            case .failure(let error):
+                completion(nil, error)
+            case .none:
+                completion(nil, nil)
+            }
+        }
     }
 }

@@ -13,31 +13,29 @@ enum FirestoreEndPoint: String {
 }
 
 protocol FirestoreManable {
-    func downloadURL(from: StorageReference, completion: @escaping (String?, Error?) -> Void) throws
-    func upload(data: Data, completion: @escaping (StorageMetadata?, Error?) -> Void) throws
+    func downloadURL(from: StorageReference, completion: @escaping (String?, Error?) -> Void)
+    func upload(data: Data, completion: @escaping (StorageReference?, StorageMetadata?, Error?) -> Void) throws
 }
 
 class FirestoreManager: FirestoreManable {
     
-    func downloadURL(from: StorageReference, completion: @escaping (String?, Error?) -> Void) throws {
+    func downloadURL(from: StorageReference, completion: @escaping (String?, Error?) -> Void) {
         from.downloadURL { url, error in
             guard let imageUrl = url?.absoluteString else { return }
             completion(imageUrl, nil)
         }
     }
     
-    func upload(data: Data, completion: @escaping (StorageMetadata?, Error?) -> Void) throws {
+    func upload(data: Data, completion: @escaping (StorageReference?, StorageMetadata?, Error?) -> Void) throws {
         let filename = UUID().uuidString
         let to = Storage.storage().reference(withPath: "\(FirestoreEndPoint.profileImagePath)/\(filename)")
         to.putData(data, metadata: nil) { metaData, error in
             if let error = error {
                 print("DEBUG: Upload Failure \(String(describing: error.localizedDescription))")
-                completion(nil, error)
+                completion(to, nil, error)
             }
-            completion(metaData, nil)
+            completion(to, metaData, nil)
         }
     }
     
-    
-
 }
