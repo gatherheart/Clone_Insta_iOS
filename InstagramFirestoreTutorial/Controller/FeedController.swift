@@ -37,6 +37,10 @@ class FeedController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         setCollectionView()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "logout",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(logout))
     }
     
     private func setCollectionView() {
@@ -44,6 +48,14 @@ class FeedController: UIViewController {
         collectionView.backgroundColor = .white
         collectionView.register(FeedCollectionViewCell.self, forCellWithReuseIdentifier: FeedCollectionViewCell.reuseIdentifier)
         self.view.addSubview(collectionView)
+    }
+    
+    @objc
+    private func logout() {
+        AuthUseCase.logout { error in
+            guard error == nil else { return }
+            AuthUseCase.showLoginController(sender: self)
+        }
     }
 }
 

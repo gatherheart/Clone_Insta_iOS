@@ -56,4 +56,11 @@ struct AuthUseCase {
             }
         }
     }
+    
+    static func showLoginController(sender: UIViewController) {
+        let controller = LoginController()
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        sender.present(nav, animated: true, completion: nil)
+    }
 }
