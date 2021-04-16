@@ -73,22 +73,35 @@ class RegistrationController: UIViewController {
         guard let username = registrationViewPresenter.username.text?.lowercased() else { return }
         guard let profileImage = registrationViewPresenter.plusPhoto.imageView?.image else { return }
         
+
         let credentials = AuthCredentials(email: email, password: password,
                                           fullname: fullname, username: username,
                                           profileImage: profileImage)
-        AuthUseCase.register(with: credentials, firestoreManger: FirestoreManager()) { result in
+        AuthUseCase.register(with: credentials, firestoreManger: FirestoreManager()) { [weak self] result in
             switch result {
-            case .success(let code):
-                print(code)
-                print("DEBUG: Successfully registered user")
+            case .success(let user):
+                self?.presentSuccessAlert(user["username"] as! String)
             case .failure(let error):
-                print("DEBUG: Failed to register user \(error.localizedDescription)")
+                self?.presentFailureAlert(error)
             }
         }
     }
+    
     @objc
     private func goToLogin() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func presentSuccessAlert(_ user: String) {
+        let alert = UIAlertController(title: "Successfully SignedUp", message: "\(user)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in self?.dismiss(animated: true, completion: nil)}))
+        self.present(alert, animated: true)
+    }
+    
+    private func presentFailureAlert(_ error: Error) {
+        let alert = UIAlertController(title: "Failed to register user", message: "\(error.localizedDescription)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in }))
+        self.present(alert, animated: true)
     }
 }
 

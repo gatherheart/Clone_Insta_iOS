@@ -15,7 +15,7 @@ enum AuthErrors: Error {
 }
 
 struct AuthRequest {
-    static func register(with: AuthCredentials, completion: @escaping(Result<String, AuthErrors>?) -> Void) {
+    static func register(with: AuthCredentials, completion: @escaping (Result<String, AuthErrors>?) -> Void) {
         Auth.auth().createUser(withEmail: with.email, password: with.password) { (result, error) in
             if let error = error {
                 print("DEBUG ERROR: Register failure \(String(describing: error.localizedDescription))")
@@ -24,6 +24,19 @@ struct AuthRequest {
             }
             guard let uid = result?.user.uid else { completion(.failure(.badRequest)); return }
             completion(.success(uid))
+        }
+    }
+    
+    static func checkLoggedIn() -> Bool {
+        return (Auth.auth().currentUser != nil)
+    }
+    
+    static func logout(completion: @escaping (Error?) -> Void) {
+        do {
+            try Auth.auth().signOut()
+            completion(nil)
+        } catch let error {
+            completion(error)
         }
     }
 }

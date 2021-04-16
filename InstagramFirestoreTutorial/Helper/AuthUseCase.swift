@@ -6,11 +6,17 @@
 //
 
 import Foundation
+import FirebaseAuth
 import FirebaseFirestore
 
 typealias UserType = [String: Any]
 
 struct AuthUseCase {
+    
+    static func checkLoggedIn() -> Bool {
+        return AuthRequest.checkLoggedIn()
+    }
+    
     static func register(with: AuthCredentials, firestoreManger: FirestoreManable, completion: @escaping (Result<UserType, Error>) -> Void) {
         ImageUploader.upload(image: with.profileImage, firestoreManger: firestoreManger) { result in
             
@@ -22,6 +28,12 @@ struct AuthUseCase {
             case .failure(let error):
                 completion(.failure(error))
             }
+        }
+    }
+    
+    static func logout(completion: @escaping (Error?)->()) {
+        AuthRequest.logout() { error in
+            completion(error)
         }
     }
     

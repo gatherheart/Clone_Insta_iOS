@@ -16,9 +16,13 @@ class MainTabController: UITabBarController {
         configureViewController()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        configureLoginViewController()
+    }
 
     // MARK: - Helpers
-    func configureViewController() {
+    private func configureViewController() {
         let feed = TabBarItemFactory.item(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected"), rootViewController: FeedController.self)
         let search = TabBarItemFactory.item(unselectedImage: #imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected"), rootViewController: SearchController.self)
         let imageSelector = TabBarItemFactory.item(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_unselected"), rootViewController: ImageSelectorController.self)
@@ -26,6 +30,16 @@ class MainTabController: UITabBarController {
         let profile = TabBarItemFactory.item(unselectedImage: #imageLiteral(resourceName: "profile_unselected"), selectedImage: #imageLiteral(resourceName: "profile_selected"), rootViewController: ProfileController.self)
         viewControllers = [feed, search, imageSelector, notifications, profile]
         tabBar.tintColor = .black
+    }
+    
+    private func configureLoginViewController() {
+        let isLoggedIn: Bool = AuthUseCase.checkLoggedIn()
+        if isLoggedIn == false {
+            let controller = LoginController()
+            let navigationController = UINavigationController(rootViewController: controller)
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
+        }
     }
     
 }

@@ -16,9 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-//        window?.rootViewController = MainTabController()
-        window?.rootViewController = UINavigationController(rootViewController: LoginController())
-        // Shows the window and makes it the key window.
+        window?.rootViewController = MainTabController()
         window?.makeKeyAndVisible()
     }
 
