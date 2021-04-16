@@ -34,6 +34,7 @@ class FeedController: UIViewController {
     }
     
     private func commonInit() {
+        navigationItem.title = "Feed"
         collectionView.delegate = self
         collectionView.dataSource = self
         setCollectionView()

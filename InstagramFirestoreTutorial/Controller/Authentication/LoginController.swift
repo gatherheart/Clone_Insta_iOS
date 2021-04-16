@@ -44,6 +44,7 @@ extension LoginController {
         loginViewPresenter.email.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
         loginViewPresenter.password.addTarget(self, action: #selector(textDidChange(_:)), for: .editingChanged)
         loginViewPresenter.signUp.addTarget(self, action: #selector(goToSignUp(_:)), for: .touchUpInside)
+        loginViewPresenter.login.addTarget(self, action: #selector(login(_:)), for: .touchUpInside)
     }
     
     @objc
@@ -52,7 +53,24 @@ extension LoginController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc internal func textDidChange(_ sender: UITextField) {
+    @objc
+    internal func login(_ sender: UIButton) {
+        guard let email = loginViewPresenter.email.text else { return }
+        guard let password = loginViewPresenter.password.text else { return }
+        AuthUseCase.login(withEmail: email, password: password) { result, error in
+            if let error = error {
+                let alert = UIAlertController(title: "Login Failed", message: "\(error.localizedDescription)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    @objc
+    internal func textDidChange(_ sender: UITextField) {
         switch sender {
         case loginViewPresenter.email:
             viewModel.email = sender.text

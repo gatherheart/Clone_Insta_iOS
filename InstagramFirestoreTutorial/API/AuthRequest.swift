@@ -31,6 +31,10 @@ struct AuthRequest {
         return (Auth.auth().currentUser != nil)
     }
     
+    static func login(withEmail email: String, password: String, completion: @escaping AuthDataResultCallback) {
+        Auth.auth().signIn(withEmail: email, password: password, completion: completion)
+    }
+    
     static func logout(completion: @escaping (Error?) -> Void) {
         do {
             try Auth.auth().signOut()

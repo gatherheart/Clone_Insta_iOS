@@ -13,6 +13,8 @@ typealias UserType = [String: Any]
 
 struct AuthUseCase {
     
+    static let collectionName = "users"
+    
     static func checkLoggedIn() -> Bool {
         return AuthRequest.checkLoggedIn()
     }
@@ -31,6 +33,12 @@ struct AuthUseCase {
         }
     }
     
+    static func login(withEmail: String, password: String, completion: @escaping (AuthDataResult?, Error?) -> ()) {
+        AuthRequest.login(withEmail: withEmail, password: password) { result, error in
+            completion(result, error)
+        }
+    }
+    
     static func logout(completion: @escaping (Error?)->()) {
         AuthRequest.logout() { error in
             completion(error)
@@ -46,7 +54,7 @@ struct AuthUseCase {
                                            "profileImageUrl": imageUrl,
                                            "uid": uid,
                                            "username": with.username]
-                Firestore.firestore().collection("users").document(uid).setData(data) { _ in
+                Firestore.firestore().collection(collectionName).document(uid).setData(data) { _ in
                     completion(data, nil)
                 }
             case .failure(let error):
