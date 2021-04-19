@@ -361,6 +361,8 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (1.2.12)
+  - PromisesSwift (1.2.12):
+    - PromisesObjC (= 1.2.12)
   - PryntTrimmerView (4.0.2)
   - SDWebImage (4.4.8):
     - SDWebImage/Core (= 4.4.8)
@@ -381,6 +383,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - JGProgressHUD (~> 2.0.3)
+  - PromisesSwift
   - SDWebImage (~> 4.4.2)
   - SnapKit (~> 5.0.0)
   - YPImagePicker
@@ -411,6 +414,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - PromisesSwift
     - PryntTrimmerView
     - SDWebImage
     - SnapKit
@@ -442,12 +446,13 @@ SPEC CHECKSUMS:
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  PromisesSwift: 64085cf6e5fc1b5001f90cf31e87a1f1621fefee
   PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
   YPImagePicker: 6f410f475bd22fa8cd430495b54d4b2f15865c2d
 
-PODFILE CHECKSUM: 44ca503e6ec2bbda795dbf603e9c189530630bc9
+PODFILE CHECKSUM: 727a570fdc93b5d4a53d44ba906862e2d759af18
 
 COCOAPODS: 1.10.1
