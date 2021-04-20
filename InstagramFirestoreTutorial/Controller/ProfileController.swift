@@ -9,6 +9,12 @@ import UIKit
 
 class ProfileController: UIViewController {
     
+    var user: User? {
+        didSet {
+            navigationItem.title = user?.username
+        }
+    }
+    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
@@ -30,6 +36,7 @@ class ProfileController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchUser()
     }
     
     func configureCollectionView() {
@@ -49,6 +56,15 @@ class ProfileController: UIViewController {
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: ProfileCell.reuseIdentifier)
         collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProfileHeader.reuseIdentifier)
         self.view.addSubview(collectionView)
+    }
+    
+    // MARK: - API
+    private func fetchUser() {
+        UserService.fetchUsers().then { user in
+            self.user = user
+        }.catch { error in
+            print(error)
+        }
     }
 }
 

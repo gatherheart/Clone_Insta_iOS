@@ -18,6 +18,9 @@
 		5D7BC4F7261B73EB00426D53 /* ImageSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4F6261B73EB00426D53 /* ImageSelectorController.swift */; };
 		5D7BC4FC261B73FA00426D53 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4FB261B73FA00426D53 /* NotificationController.swift */; };
 		5D7BC501261B740700426D53 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC500261B740700426D53 /* ProfileController.swift */; };
+		5D895DE0262F3F5C003FFF1D /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D895DDF262F3F5C003FFF1D /* UserService.swift */; };
+		5D895DE5262F3F95003FFF1D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D895DE4262F3F95003FFF1D /* Constants.swift */; };
+		5D895DEA262F4133003FFF1D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D895DE9262F4133003FFF1D /* User.swift */; };
 		5DBAE97E261A27E700F16CCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE97D261A27E700F16CCB /* AppDelegate.swift */; };
 		5DBAE980261A27E700F16CCB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE97F261A27E700F16CCB /* SceneDelegate.swift */; };
 		5DBAE982261A27E700F16CCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE981261A27E700F16CCB /* ViewController.swift */; };
@@ -78,6 +81,9 @@
 		5D7BC4F6261B73EB00426D53 /* ImageSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorController.swift; sourceTree = "<group>"; };
 		5D7BC4FB261B73FA00426D53 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		5D7BC500261B740700426D53 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		5D895DDF262F3F5C003FFF1D /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		5D895DE4262F3F95003FFF1D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5D895DE9262F4133003FFF1D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5DBAE97A261A27E700F16CCB /* InstagramFirestoreTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramFirestoreTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DBAE97D261A27E700F16CCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DBAE97F261A27E700F16CCB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -242,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				5DCEEA472624991C00B220F6 /* AuthModel.swift */,
+				5D895DE9262F4133003FFF1D /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -284,6 +291,7 @@
 				5DCEEA3A262493C700B220F6 /* NetworkManager.swift */,
 				5DCEEA42262498C100B220F6 /* AuthRequest.swift */,
 				5DCEEA4F26249E5A00B220F6 /* FirestoreManager.swift */,
+				5D895DDF262F3F5C003FFF1D /* UserService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -300,6 +308,7 @@
 			children = (
 				5DC992B62629D34A0013CACB /* ImageUploader.swift */,
 				5DCEEA5426249F2300B220F6 /* AuthUseCase.swift */,
+				5D895DE4262F3F95003FFF1D /* Constants.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -572,12 +581,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D895DE0262F3F5C003FFF1D /* UserService.swift in Sources */,
 				5DCEEA5026249E5A00B220F6 /* FirestoreManager.swift in Sources */,
 				5DE8FA03261CC82B0097BE3E /* CustomTextField.swift in Sources */,
 				5DC992B72629D34A0013CACB /* ImageUploader.swift in Sources */,
 				5DBAE982261A27E700F16CCB /* ViewController.swift in Sources */,
+				5D895DE5262F3F95003FFF1D /* Constants.swift in Sources */,
 				5DC065BE261D9A5900397954 /* AuthenticationViewModel.swift in Sources */,
 				5DE8F9F6261CB80F0097BE3E /* LoginController.swift in Sources */,
+				5D895DEA262F4133003FFF1D /* User.swift in Sources */,
 				5D4CF092262173FE009C33EC /* RegistrationViewPresenter.swift in Sources */,
 				5D7BC4F7261B73EB00426D53 /* ImageSelectorController.swift in Sources */,
 				5DCEEA5526249F2300B220F6 /* AuthUseCase.swift in Sources */,

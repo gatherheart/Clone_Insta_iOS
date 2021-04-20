@@ -12,9 +12,7 @@ import FirebaseFirestore
 typealias UserType = [String: Any]
 
 struct AuthUseCase {
-    
-    static let collectionName = "users"
-    
+
     static func checkLoggedIn() -> Bool {
         return AuthRequest.checkLoggedIn()
     }
@@ -54,7 +52,7 @@ struct AuthUseCase {
                                            "profileImageUrl": imageUrl,
                                            "uid": uid,
                                            "username": with.username]
-                Firestore.firestore().collection(collectionName).document(uid).setData(data) { _ in
+                FireBaseCollections.users.document(uid).setData(data) { _ in
                     completion(data, nil)
                 }
             case .failure(let error):

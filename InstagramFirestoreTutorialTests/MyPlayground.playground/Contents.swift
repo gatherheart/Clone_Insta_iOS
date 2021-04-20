@@ -36,19 +36,30 @@ func square(number: Int) -> Int {
   return number * number
 }
 
+//func divide(_ number: Int, by: Int) -> Promise<Int> {
+//    return Promise {
+//        return number / by
+//    }
+//}
+
 func divide(_ number: Int, by: Int) -> Promise<Int> {
-    return Promise {
-        return number / by
+    return Promise { fullfill, reject in
+        if number % 2 == 0 {
+            fullfill(number / by)
+        } else {
+            reject(PlaygroundError.invalidNumber)
+        }
     }
 }
 
-reverse(string: "4000")
+reverse(string: "5000")
     .then(number(from:))
     .then { number in
         return divide(number, by: 2)
-    }
-    .then { result in
+    }.then { result in
         print(result)
+    }.catch { error in
+        print(error)
     }
 //
 //
