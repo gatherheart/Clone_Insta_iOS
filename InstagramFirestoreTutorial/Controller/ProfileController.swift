@@ -11,7 +11,7 @@ class ProfileController: UIViewController {
     
     var user: User? {
         didSet {
-            navigationItem.title = user?.username
+            collectionView.reloadData()
         }
     }
     
@@ -62,6 +62,7 @@ class ProfileController: UIViewController {
     private func fetchUser() {
         UserService.fetchUsers().then { user in
             self.user = user
+            self.navigationItem.title = user.username
         }.catch { error in
             print(error)
         }
@@ -88,6 +89,9 @@ extension ProfileController: UICollectionViewDataSource {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ProfileHeader.reuseIdentifier, for: indexPath) as? ProfileHeader else { return UICollectionReusableView() }
+            if let user = user {
+                header.viewModel = ProfileHeaderViewModel(user: user)
+            }
             return header
         default:
         return UICollectionReusableView()

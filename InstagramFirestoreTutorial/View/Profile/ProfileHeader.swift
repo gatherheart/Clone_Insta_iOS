@@ -8,7 +8,14 @@
 import UIKit
 
 class ProfileHeader: UICollectionReusableView {
+    
     static let reuseIdentifier = "ProfileHeader"
+    var viewModel: ProfileHeaderViewModel? {
+        didSet {
+            configure()
+        }
+    }
+    
     private let profileImage: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "venom-7")
@@ -236,6 +243,13 @@ class ProfileHeader: UICollectionReusableView {
     @objc
     func editProfile(_ sender: UIButton) {
         print(sender)
+    }
+    private func configure() {
+        guard let viewModel = viewModel else { return }
+        name.text = viewModel.fullname
+        if let url = URL(string: viewModel.profileImage) {
+            profileImage.kf.setImage(with: url)
+        }
     }
 }
 

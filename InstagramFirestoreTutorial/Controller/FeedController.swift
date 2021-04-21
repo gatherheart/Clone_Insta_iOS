@@ -53,10 +53,18 @@ class FeedController: UIViewController {
     
     @objc
     private func logout() {
-        AuthUseCase.logout { error in
-            guard error == nil else { return }
-            AuthUseCase.showLoginController(sender: self)
+        AuthUseCase.logout { [weak self] error in
+            guard error == nil, let self = self else { return }
+            self.showLoginController(sender: self)
         }
+    }
+    
+    func showLoginController(sender: UIViewController) {
+        let controller = LoginController()
+        controller.delegate = self.tabBarController as? MainTabController
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        sender.present(nav, animated: true, completion: nil)
     }
 }
 

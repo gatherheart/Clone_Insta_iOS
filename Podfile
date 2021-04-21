@@ -6,6 +6,7 @@ target 'InstagramFirestoreTutorial' do
   use_frameworks!
   
   # Pods for InstagramFirestoreTutorial
+  pod 'Kingfisher', '~> 6.0'
   pod 'PromisesSwift'
   pod 'SnapKit', '~> 5.0.0'
   pod 'Firebase/Analytics'

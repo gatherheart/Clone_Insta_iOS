@@ -57,21 +57,20 @@ reverse(string: "5000")
     .then { number in
         return divide(number, by: 2)
     }.then { result in
-        print(result)
+        print("1", result)
     }.catch { error in
-        print(error)
+        print("1", error)
     }
-//
-//
-//reverse(string: "01")
-//    .then(number(from:))
-//    .then(square(number:))
-//    .then {
-//        print($0) // 100
-//    }
-//
-//reverse(string: "hello")
-//    .then(number(from:))
-//    .catch { error in
-//        print(error)
-//    }
+
+reverse(string: "01")
+    .then(number(from:))
+    .then(square(number:))
+    .then {
+        print("2", $0) // 100
+    }
+
+reverse(string: "hello")
+    .then(number(from:))
+    .catch { error in
+        print("3", error)
+    }

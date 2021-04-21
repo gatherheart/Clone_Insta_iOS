@@ -8,10 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol AuthenticationDelegate: AnyObject {
+    func didAuthenticationComplete()
+}
+
 class LoginController: UIViewController {
     
     private var viewModel:LoginViewModel = LoginViewModel()
     private var loginViewPresenter: LoginViewPresentable!
+    weak var delegate: AuthenticationDelegate?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -34,8 +39,6 @@ class LoginController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
     }
-    
-
 }
 
 extension LoginController {
@@ -50,6 +53,7 @@ extension LoginController {
     @objc
     internal func goToSignUp(_ sender: UIButton) {
         let vc = RegistrationController()
+        vc.delegate = delegate
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -64,8 +68,7 @@ extension LoginController {
                 self.present(alert, animated: true, completion: nil)
                 return
             }
-            
-            self.dismiss(animated: true, completion: nil)
+            self.delegate?.didAuthenticationComplete()
         }
     }
     

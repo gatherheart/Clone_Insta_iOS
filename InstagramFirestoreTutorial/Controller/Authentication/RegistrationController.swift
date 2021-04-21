@@ -11,6 +11,7 @@ class RegistrationController: UIViewController {
     
     private var viewModel: RegistrationViewModel = RegistrationViewModel()
     private var registrationViewPresenter: RegistrationViewPresentable!
+    weak var delegate: AuthenticationDelegate?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -94,7 +95,8 @@ class RegistrationController: UIViewController {
     
     private func presentSuccessAlert(_ user: String) {
         let alert = UIAlertController(title: "Successfully SignedUp", message: "\(user)", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in self?.dismiss(animated: true, completion: nil)}))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in self?.delegate?.didAuthenticationComplete()
+        }))
         self.present(alert, animated: true)
     }
     

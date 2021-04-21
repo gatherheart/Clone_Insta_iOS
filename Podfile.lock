@@ -354,6 +354,7 @@ PODS:
   - gRPC-Core/Interface (1.28.2)
   - GTMSessionFetcher/Core (1.5.0)
   - JGProgressHUD (2.0.4)
+  - Kingfisher (6.2.1)
   - leveldb-library (1.22.1)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
@@ -383,6 +384,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - JGProgressHUD (~> 2.0.3)
+  - Kingfisher (~> 6.0)
   - PromisesSwift
   - SDWebImage (~> 4.4.2)
   - SnapKit (~> 5.0.0)
@@ -411,6 +413,7 @@ SPEC REPOS:
     - gRPC-Core
     - GTMSessionFetcher
     - JGProgressHUD
+    - Kingfisher
     - leveldb-library
     - nanopb
     - PromisesObjC
@@ -443,6 +446,7 @@ SPEC CHECKSUMS:
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
+  Kingfisher: e71c6fac2aebb1262888cabc2cb13d313362a48f
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
@@ -453,6 +457,6 @@ SPEC CHECKSUMS:
   SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
   YPImagePicker: 6f410f475bd22fa8cd430495b54d4b2f15865c2d
 
-PODFILE CHECKSUM: 727a570fdc93b5d4a53d44ba906862e2d759af18
+PODFILE CHECKSUM: 5d26f447f5f58d0a4d11d8dc0ea562b4f9190759
 
 COCOAPODS: 1.10.1
