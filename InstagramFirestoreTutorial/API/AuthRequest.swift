@@ -7,23 +7,26 @@
 
 import UIKit
 import FirebaseAuth
+import Promises
 
 enum AuthErrors: Error {
     case invalidURL
     case serverError
     case badRequest
+    case notFoundUser
 }
 
 struct AuthRequest {
-    static func register(with: AuthCredentials, completion: @escaping (Result<String, AuthErrors>?) -> Void) {
-        Auth.auth().createUser(withEmail: with.email, password: with.password) { (result, error) in
-            if let error = error {
-                print("DEBUG ERROR: Register failure \(String(describing: error.localizedDescription))")
-                completion(.failure(.badRequest))
-                return
+    static func register(with: AuthCredentials) -> Promise<String> {
+        return Promise { fulfill, reject in
+            Auth.auth().createUser(withEmail: with.email, password: with.password) { (result, error) in
+                if let error = error {
+                    print("DEBUG ERROR: Register failure \(String(describing: error.localizedDescription))")
+                    reject(error)
+                }
+                guard let uid = result?.user.uid else { reject(AuthErrors.badRequest); return }
+                fulfill(uid)
             }
-            guard let uid = result?.user.uid else { completion(.failure(.badRequest)); return }
-            completion(.success(uid))
         }
     }
     
@@ -35,12 +38,14 @@ struct AuthRequest {
         Auth.auth().signIn(withEmail: email, password: password, completion: completion)
     }
     
-    static func logout(completion: @escaping (Error?) -> Void) {
-        do {
-            try Auth.auth().signOut()
-            completion(nil)
-        } catch let error {
-            completion(error)
+    static func logout() -> Promise<Void> {
+        return Promise { fulfill, reject in
+            do {
+                try Auth.auth().signOut()
+                fulfill(())
+            } catch let error {
+                reject(error)
+            }
         }
     }
 }

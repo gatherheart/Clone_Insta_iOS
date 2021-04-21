@@ -30,12 +30,10 @@ class RegistrationViewPresenter: RegistrationViewPresentable {
     }
     
     // MARK: - UI Components
-    
     private(set) var plusPhoto: UIButton = {
         let button = ButtonFactory.button(backgroundColor: .clear)
         button.tintColor = .white
         button.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
-        
         button.layer.cornerRadius = button.frame.width / 2
         button.layer.masksToBounds = true
         return button
@@ -44,6 +42,8 @@ class RegistrationViewPresenter: RegistrationViewPresentable {
     private(set) var email: CustomTextField = {
         let tf = CustomTextField(placeholder: "Email")
         tf.keyboardType = .emailAddress
+        tf.autocorrectionType = .no
+        tf.autocapitalizationType = .none
         return tf
     }()
 

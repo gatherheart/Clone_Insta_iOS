@@ -12,6 +12,7 @@ class RegistrationController: UIViewController {
     private var viewModel: RegistrationViewModel = RegistrationViewModel()
     private var registrationViewPresenter: RegistrationViewPresentable!
     weak var delegate: AuthenticationDelegate?
+    private var selectedImage: UIImage?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -72,7 +73,7 @@ class RegistrationController: UIViewController {
         guard let password = registrationViewPresenter.password.text else { return }
         guard let fullname = registrationViewPresenter.fullname.text else { return }
         guard let username = registrationViewPresenter.username.text?.lowercased() else { return }
-        guard let profileImage = registrationViewPresenter.plusPhoto.imageView?.image else { return }
+        guard let profileImage = selectedImage else { return }
         
 
         let credentials = AuthCredentials(email: email, password: password,
@@ -110,6 +111,7 @@ class RegistrationController: UIViewController {
 extension RegistrationController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let seleted = info[.editedImage] as? UIImage else { return }
+        self.selectedImage = seleted
         registrationViewPresenter.plusPhoto.setImage(seleted.withRenderingMode(.alwaysOriginal), for: .normal)
         registrationViewPresenter.plusPhoto.layer.cornerRadius = registrationViewPresenter.plusPhoto.frame.width / 2
         self.dismiss(animated: true)

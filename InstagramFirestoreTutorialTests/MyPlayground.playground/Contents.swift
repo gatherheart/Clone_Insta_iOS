@@ -16,6 +16,7 @@ import PlaygroundSupport
 import Promises
 
 PlaygroundPage.current.needsIndefiniteExecution = true
+// https://theswiftdev.com/promises-in-swift-for-beginners/
 
 enum PlaygroundError: Error {
   case invalidNumber
@@ -25,6 +26,18 @@ func reverse(string: String) -> Promise<String> {
   return Promise(String(string.reversed())).delay(0.1)
 }
 
+func reverse2(string: String) -> Promise<String> {
+    return Promise { () -> String in
+        return String(string.reversed())
+    }
+}
+
+func string(from number: Int) -> Promise<String> {
+  return Promise { () -> String in
+    return String(number)
+  }.delay(0.1)
+}
+
 func number(from string: String) -> Promise<Int> {
   return Promise { () -> Int in
     guard let number = Int(string) else { throw PlaygroundError.invalidNumber }
@@ -32,17 +45,35 @@ func number(from string: String) -> Promise<Int> {
   }.delay(0.1)
 }
 
+func number2(from string: String) -> Promise<Int> {
+  return Promise { fulfill, reject in
+    guard let number = Int(string) else { reject(PlaygroundError.invalidNumber); return }
+    fulfill(number)
+  }.delay(0.1)
+}
+
 func square(number: Int) -> Int {
   return number * number
 }
 
-//func divide(_ number: Int, by: Int) -> Promise<Int> {
-//    return Promise {
-//        return number / by
-//    }
-//}
-
 func divide(_ number: Int, by: Int) -> Promise<Int> {
+    return Promise {
+        return number / by
+    }
+}
+
+func divide2(_ number: Int, by: Int) -> Promise<Int> {
+    return Promise(number / by)
+}
+
+func divide3(_ number: Int, by: Int) -> Promise<Int> {
+    return Promise { () -> Int in
+        let newNumber = number + 1
+        return newNumber / by
+    }
+}
+
+func divide4(_ number: Int, by: Int) -> Promise<Int> {
     return Promise { fullfill, reject in
         if number % 2 == 0 {
             fullfill(number / by)
@@ -52,13 +83,31 @@ func divide(_ number: Int, by: Int) -> Promise<Int> {
     }
 }
 
+reverse2(string: "4000")
+    .then(number(from:))
+    .then { number in
+        return divide3(number, by: 2)
+    }.then(square(number:))
+    .then { number in
+        return divide2(number, by: 1)
+    }
+    .then { result in
+        print("0", result)
+    }
+    .catch { error in
+        print("0", error)
+    }
+
 reverse(string: "5000")
     .then(number(from:))
     .then { number in
         return divide(number, by: 2)
     }.then { result in
-        print("1", result)
-    }.catch { error in
+        string(from: result)
+    }.then { result in
+        print(result)
+    }
+    .catch { error in
         print("1", error)
     }
 
@@ -74,3 +123,7 @@ reverse(string: "hello")
     .catch { error in
         print("3", error)
     }
+//
+//DispatchQueue.concurrentPerform(iterations: 1) { (i) in
+//    print(i)
+//}

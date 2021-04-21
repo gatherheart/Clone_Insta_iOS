@@ -9,11 +9,11 @@ import UIKit
 
 class MainTabController: UITabBarController {
     
-    private var feed: UIViewController!
-    private var search: UIViewController!
-    private var imageSelector: UIViewController!
-    private var notifications: UIViewController!
-    private var profile: UIViewController!
+    private var feed: UINavigationController!
+    private var search: UINavigationController!
+    private var imageSelector: UINavigationController!
+    private var notifications: UINavigationController!
+    private var profile: UINavigationController!
     private var user: User? {
         didSet {
             guard let user = user else { return }
@@ -45,7 +45,7 @@ class MainTabController: UITabBarController {
     }
     
     private func setUserForViewControllers(with: User) {
-        (profile as? ProfileController)?.user = user
+        (profile.viewControllers.first as? ProfileController)?.user = user
     }
     
     private func configureLoginViewController() {

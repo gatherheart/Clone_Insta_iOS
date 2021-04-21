@@ -39,6 +39,8 @@ class LoginViewPresenter: LoginViewPresentable {
     private(set) var email: UITextField = {
         let tf = CustomTextField(placeholder: "Email")
         tf.keyboardType = .emailAddress
+        tf.autocorrectionType = .no
+        tf.autocapitalizationType = .none
         return tf
     }()
     private(set) var password: UITextField = {

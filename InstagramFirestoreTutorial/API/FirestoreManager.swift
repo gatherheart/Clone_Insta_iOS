@@ -6,6 +6,7 @@
 //
 
 import FirebaseStorage
+import Promises
 
 enum FirestoreEndPoint: String {
     case basePath =  "/"
@@ -13,28 +14,37 @@ enum FirestoreEndPoint: String {
 }
 
 protocol FirestoreManable {
-    func downloadURL(from: StorageReference, completion: @escaping (String?, Error?) -> Void)
-    func upload(data: Data, completion: @escaping (StorageReference?, StorageMetadata?, Error?) -> Void) throws
+    func downloadURL(from: StorageReference) -> Promise<String>
+    func upload(data: Data) -> Promise<(StorageReference?, StorageMetadata?)>
 }
 
 class FirestoreManager: FirestoreManable {
     
-    func downloadURL(from: StorageReference, completion: @escaping (String?, Error?) -> Void) {
-        from.downloadURL { url, error in
-            guard let imageUrl = url?.absoluteString else { return }
-            completion(imageUrl, nil)
+    func upload(data: Data) -> Promise<(StorageReference?, StorageMetadata?)> {
+        let filename = UUID().uuidString
+        let to = Storage.storage().reference(withPath: "\(FirestoreEndPoint.profileImagePath)/\(filename)")
+        
+        return Promise { fulfill, reject in
+            to.putData(data, metadata: nil) { metaData, error in
+                if let error = error {
+                    print("DEBUG: Upload Failure \(String(describing: error.localizedDescription))")
+                    reject(error)
+                }
+                fulfill((to, metaData))
+            }
         }
     }
     
-    func upload(data: Data, completion: @escaping (StorageReference?, StorageMetadata?, Error?) -> Void) throws {
-        let filename = UUID().uuidString
-        let to = Storage.storage().reference(withPath: "\(FirestoreEndPoint.profileImagePath)/\(filename)")
-        to.putData(data, metadata: nil) { metaData, error in
-            if let error = error {
-                print("DEBUG: Upload Failure \(String(describing: error.localizedDescription))")
-                completion(to, nil, error)
+    func downloadURL(from: StorageReference) -> Promise<String> {
+        return Promise { fulfill, reject in
+            from.downloadURL { url, error in
+                if let error = error {
+                    reject(error)
+                    return
+                }
+                guard let imageUrl = url?.absoluteString else { return }
+                fulfill(imageUrl)
             }
-            completion(to, metaData, nil)
         }
     }
     

@@ -53,8 +53,8 @@ class FeedController: UIViewController {
     
     @objc
     private func logout() {
-        AuthUseCase.logout { [weak self] error in
-            guard error == nil, let self = self else { return }
+        AuthUseCase.logout { [weak self] in
+            guard let self = self else { return }
             self.showLoginController(sender: self)
         }
     }

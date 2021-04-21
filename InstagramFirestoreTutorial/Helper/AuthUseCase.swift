@@ -18,15 +18,9 @@ struct AuthUseCase {
     }
     
     static func register(with: AuthCredentials, firestoreManger: FirestoreManable, completion: @escaping (Result<UserType, Error>) -> Void) {
-        ImageUploader.upload(image: with.profileImage, firestoreManger: firestoreManger) { result in
-            
-            switch result {
-            case .success(let imageUrl):
-                requestRegistration(with: with, imageUrl: imageUrl) { user, error in
-                    completion(.success(user!))
-                }
-            case .failure(let error):
-                completion(.failure(error))
+        ImageUploader.upload(image: with.profileImage, firestoreManger: firestoreManger).then { imageUrl in
+            requestRegistration(with: with, imageUrl: imageUrl) { user, error in
+                completion(.success(user!))
             }
         }
     }
@@ -37,28 +31,21 @@ struct AuthUseCase {
         }
     }
     
-    static func logout(completion: @escaping (Error?)->()) {
-        AuthRequest.logout() { error in
-            completion(error)
+    static func logout(completion: @escaping ()->()) {
+        AuthRequest.logout().then { _ in
+            completion()
         }
     }
     
     private static func requestRegistration(with: AuthCredentials, imageUrl: String, completion: @escaping (UserType?, Error?) -> Void) {
-        AuthRequest.register(with: with) { (result) in
-            switch result {
-            case .success(let uid):
-                let data: [String: Any] = ["email": with.email,
-                                           "fullname": with.fullname,
-                                           "profileImageUrl": imageUrl,
-                                           "uid": uid,
-                                           "username": with.username]
-                FireBaseCollections.users.document(uid).setData(data) { _ in
-                    completion(data, nil)
-                }
-            case .failure(let error):
-                completion(nil, error)
-            case .none:
-                completion(nil, nil)
+        AuthRequest.register(with: with).then { uid in
+            let data: [String: Any] = ["email": with.email,
+                                       "fullname": with.fullname,
+                                       "profileImageUrl": imageUrl,
+                                       "uid": uid,
+                                       "username": with.username]
+            FireBaseCollections.users.document(uid).setData(data) { _ in
+                completion(data, nil)
             }
         }
     }
