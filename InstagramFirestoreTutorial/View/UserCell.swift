@@ -7,11 +7,19 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class UserCell: UITableViewCell {
     
     public static let reuseIdentifier: String = "UserCell"
     private let profileImageSize: CGFloat = 48
+    
+    var user: User? {
+        didSet {
+            setUser()
+        }
+    }
+    
     private let profileImage: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -64,6 +72,14 @@ class UserCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
+    }
+    
+    private func setUser() {
+        usernameLabel.text = user?.username
+        fullnameLabel.text = user?.fullname
+        if let profileUrl = user?.profileImageUrl, let url = URL(string: profileUrl) {
+            profileImage.kf.setImage(with: url)
+        }
     }
     
     private func setProfileImage() {

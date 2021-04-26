@@ -17,7 +17,7 @@ struct UserService {
         case noSnapShotData
     }
     
-    static func fetchUsers() -> Promise<User> {
+    static func fetchUser() -> Promise<User> {
         return Promise<User> { fulfill, reject in
             guard let uid = Auth.auth().currentUser?.uid else { reject(UserServiceError.currentUserAuthError); return }
             FireBaseCollections.users.document(uid).getDocument { snapshot, error in
@@ -29,7 +29,15 @@ struct UserService {
                 fulfill(user)
             }
         }
-
-        
+    }
+    
+    static func fetchUsers() -> Promise<Array<User>> {
+        return Promise<Array<User>> { fulfill, reject in
+            FireBaseCollections.users.getDocuments { snapshot, error in
+                guard let snapshot = snapshot else { reject(UserServiceError.noSnapShotData); return }
+                let users = snapshot.documents.map({ User(from: $0.data())})
+                fulfill(users)
+            }
+        }
     }
 }

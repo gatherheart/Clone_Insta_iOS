@@ -62,7 +62,7 @@ class MainTabController: UITabBarController {
 
 extension MainTabController: AuthenticationDelegate {
     private func fetchUser() {
-        UserService.fetchUsers().then { user in
+        UserService.fetchUser().then { user in
             self.user = user
         }
     }

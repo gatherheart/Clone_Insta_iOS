@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import Foundation
+import UIKit
 import PlaygroundSupport
 import Promises
 
@@ -127,3 +127,9 @@ reverse(string: "hello")
 //DispatchQueue.concurrentPerform(iterations: 1) { (i) in
 //    print(i)
 //}
+
+var a = CGRect(x: 0, y: 0, width: 10, height: 10)
+var b = a
+b.size = CGSize(width: 20, height: 20)
+print(a)
+print(b)
