@@ -14,9 +14,9 @@ class UserCell: UITableViewCell {
     public static let reuseIdentifier: String = "UserCell"
     private let profileImageSize: CGFloat = 48
     
-    var user: User? {
+    var viewModel: UserCellViewModel? {
         didSet {
-            setUser()
+            configure()
         }
     }
     
@@ -74,12 +74,11 @@ class UserCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    private func setUser() {
-        usernameLabel.text = user?.username
-        fullnameLabel.text = user?.fullname
-        if let profileUrl = user?.profileImageUrl, let url = URL(string: profileUrl) {
-            profileImage.kf.setImage(with: url)
-        }
+    private func configure() {
+        guard let viewModel = viewModel else { return }
+        usernameLabel.text = viewModel.username
+        fullnameLabel.text = viewModel.fullname
+        profileImage.kf.setImage(with: viewModel.profileImageUrl)
     }
     
     private func setProfileImage() {

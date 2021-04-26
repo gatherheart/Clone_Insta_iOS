@@ -7,12 +7,13 @@
 
 import Foundation
 
-struct User {
+struct User: Hashable {
     let email: String
     let fullname: String
     let profileImageUrl: String
     let username: String
     let uid: String
+    let identifier = UUID()
 
     init(from dictionary: [String: Any]) {
         self.email = dictionary["email"] as? String ?? ""
@@ -21,4 +22,13 @@ struct User {
         self.username = dictionary["username"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""
     }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
+    
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.identifier == rhs.identifier
+    }
+
 }

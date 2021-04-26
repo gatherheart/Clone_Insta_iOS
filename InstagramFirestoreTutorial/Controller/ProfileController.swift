@@ -9,12 +9,7 @@ import UIKit
 
 class ProfileController: UIViewController {
     
-    var user: User? {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
-    
+    var user: User?
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
@@ -23,6 +18,11 @@ class ProfileController: UIViewController {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return cv
     }()
+    
+    convenience init(user: User) {
+        self.init()
+        self.user = user
+    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -36,7 +36,6 @@ class ProfileController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchUser()
     }
     
     func configureCollectionView() {
@@ -61,6 +60,7 @@ class ProfileController: UIViewController {
     // MARK: - API
     private func fetchUser() {
         UserService.fetchUser().then { user in
+            print(user)
             self.user = user
             self.navigationItem.title = user.username
         }.catch { error in
