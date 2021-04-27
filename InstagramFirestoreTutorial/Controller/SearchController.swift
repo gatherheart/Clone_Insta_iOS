@@ -18,7 +18,9 @@ class SearchController: UIViewController {
     private var filteredUsers = [User]()
     private var tableView: UITableView = UITableView()
     private let searchController = UISearchController(searchResultsController: nil)
-    
+    private var isSearchMode: Bool {
+        return searchController.isActive && searchController.searchBar.text?.isEmpty == false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setDatasource()
@@ -52,8 +54,8 @@ class SearchController: UIViewController {
     
     private func setSearchController() {
         searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = true
-        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
         navigationItem.searchController = searchController
         definesPresentationContext = true
@@ -65,8 +67,10 @@ extension SearchController: UITableViewDelegate {
         return 64
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = ProfileController(user: users[indexPath.row])
-        navigationController?.pushViewController(controller, animated: true)
+        if let user = dataSource.itemIdentifier(for: indexPath) {
+            let controller = ProfileController(user: user)
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }
 
@@ -77,7 +81,11 @@ extension SearchController: UISearchResultsUpdating {
     }
     
     private func performQuery(with filter: String?) {
-        let userList = users.filter { $0.username.lowercased() == filter?.lowercased() }
+        let filterText = filter?.lowercased() ?? ""
+        let userList = users.filter {
+            return $0.username.lowercased().contains(filterText) ||
+                $0.fullname.lowercased().contains(filterText)
+        }
         var snapshot = NSDiffableDataSourceSnapshot<Section, User>()
         snapshot.appendSections([.main])
         snapshot.appendItems(userList, toSection: .main)
