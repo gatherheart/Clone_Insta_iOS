@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol ProfileHeaderDelegate: AnyObject {
+    func header(_ profileHeader: ProfileHeader, didTapActionButtonFor user: User)
+}
+
 class ProfileHeader: UICollectionReusableView {
     
     static let reuseIdentifier = "ProfileHeader"
+    weak var delegate: ProfileHeaderDelegate?
     var viewModel: ProfileHeaderViewModel? {
         didSet {
             configure()
@@ -242,14 +247,20 @@ class ProfileHeader: UICollectionReusableView {
     }
     @objc
     func editProfile(_ sender: UIButton) {
-        print(sender)
+        if let user = viewModel?.user {
+            delegate?.header(self, didTapActionButtonFor: user)
+        }
     }
+    
     private func configure() {
         guard let viewModel = viewModel else { return }
         name.text = viewModel.fullname
         if let url = URL(string: viewModel.profileImage) {
             profileImage.kf.setImage(with: url)
         }
+        editProfile.setTitle(viewModel.followButtonText, for: .normal)
+        editProfile.setTitleColor(viewModel.followButtonTextColor, for: .normal)
+        editProfile.backgroundColor = viewModel.followButtonBackgroundColor
     }
 }
 

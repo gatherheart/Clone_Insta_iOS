@@ -92,6 +92,7 @@ extension ProfileController: UICollectionViewDataSource {
             if let user = user {
                 header.viewModel = ProfileHeaderViewModel(user: user)
             }
+            header.delegate = self
             return header
         default:
         return UICollectionReusableView()
@@ -112,5 +113,21 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 240)
+    }
+}
+
+extension ProfileController: ProfileHeaderDelegate {
+    func header(_ profileHeader: ProfileHeader, didTapActionButtonFor user: User) {
+        if user.isMe {
+            print("\(user) is me")
+        }
+        else if user.isFollowed {
+            print("\(user) is followed")
+        }
+        else {
+            UserService.follow(uid: user.uid).then { result in
+                print(result)
+            }
+        }
     }
 }

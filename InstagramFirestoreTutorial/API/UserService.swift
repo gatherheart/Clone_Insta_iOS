@@ -40,4 +40,37 @@ struct UserService {
             }
         }
     }
+    
+    static func isMe(uid: String) -> Bool {
+        return UserService.myId() == uid
+    }
+    
+    static func myId() -> String? {
+        return Auth.auth().currentUser?.uid
+    }
+    
+    static func follow(uid: String) -> Promise<Bool> {
+        return Promise<Bool> { fulfill, reject in
+            guard let myId = UserService.myId() else { return }
+            let followingDocument = FireBaseCollections.following.document(myId).collection("userFollowing")
+            let follwersDocument = FireBaseCollections.following.document(uid).collection("userFollowers")
+
+            followingDocument.document(uid).setData([:]) { error in
+                follwersDocument.document(myId).setData([:]) { error in
+                    if let error = error {
+                        reject(error)
+                    }
+                    fulfill(true)
+                }
+            }
+        }
+        
+    }
+    
+    static func unfollow(uid: String) -> Promise<Bool> {
+        return Promise<Bool> {
+            guard let myId = UserService.myId() else { return }
+
+        }
+    }
 }

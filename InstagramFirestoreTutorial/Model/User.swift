@@ -14,6 +14,12 @@ struct User: Hashable {
     let username: String
     let uid: String
     let identifier = UUID()
+    var isFollowed: Bool {
+        return false
+    }
+    var isMe: Bool {
+        return UserService.isMe(uid: self.uid)
+    }
 
     init(from dictionary: [String: Any]) {
         self.email = dictionary["email"] as? String ?? ""

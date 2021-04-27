@@ -9,4 +9,6 @@ import Firebase
 
 enum FireBaseCollections {
     static let users = Firestore.firestore().collection("users")
+    static let followers = Firestore.firestore().collection("follwers")
+    static let following = Firestore.firestore().collection("following")
 }
