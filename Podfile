@@ -20,6 +20,7 @@ target 'InstagramFirestoreTutorial' do
   pod 'SDWebImage','~>4.4.2'
   pod 'JGProgressHUD','~>2.0.3'
   pod 'YPImagePicker'
+  pod 'Dwifft'
 
   target 'InstagramFirestoreTutorialTests' do
     inherit! :search_paths

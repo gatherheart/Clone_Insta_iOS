@@ -11,6 +11,11 @@ import Promises
 
 struct UserService {
     
+    enum UserCollections: String {
+        case userFollowing
+        case userFollowers
+    }
+    
     enum UserServiceError: Error {
         case currentUserAuthError
         case serverError
@@ -52,10 +57,13 @@ struct UserService {
     static func follow(uid: String) -> Promise<Bool> {
         return Promise<Bool> { fulfill, reject in
             guard let myId = UserService.myId() else { return }
-            let followingDocument = FireBaseCollections.following.document(myId).collection("userFollowing")
-            let follwersDocument = FireBaseCollections.following.document(uid).collection("userFollowers")
+            let followingDocument = FireBaseCollections.following.document(myId).collection(UserCollections.userFollowing.rawValue)
+            let follwersDocument = FireBaseCollections.following.document(uid).collection(UserCollections.userFollowers.rawValue)
 
             followingDocument.document(uid).setData([:]) { error in
+                if let error = error {
+                    reject(error)
+                }
                 follwersDocument.document(myId).setData([:]) { error in
                     if let error = error {
                         reject(error)
@@ -68,9 +76,22 @@ struct UserService {
     }
     
     static func unfollow(uid: String) -> Promise<Bool> {
-        return Promise<Bool> {
+        return Promise<Bool> { fulfill, reject in
             guard let myId = UserService.myId() else { return }
-
+            let followingDocument = FireBaseCollections.following.document(myId).collection(UserCollections.userFollowing.rawValue)
+            let follwersDocument = FireBaseCollections.following.document(uid).collection(UserCollections.userFollowers.rawValue)
+            
+            followingDocument.document(uid).delete() { error in
+                if let error = error {
+                    reject(error)
+                }
+                follwersDocument.document(myId).delete() { error in
+                    if let error = error {
+                        reject(error)
+                    }
+                    fulfill(true)
+                }
+            }
         }
     }
 }

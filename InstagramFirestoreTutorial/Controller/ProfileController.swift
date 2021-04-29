@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Dwifft
 
 class ProfileController: UIViewController {
     
@@ -18,7 +19,13 @@ class ProfileController: UIViewController {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return cv
     }()
-    
+    var stuff: SectionedValues<String, String> = Stuff.userStuff() {
+        didSet {
+            self.diffCalculator?.sectionedValues = stuff
+        }
+    }
+    var diffCalculator: CollectionViewDiffCalculator<String, String>?
+
     convenience init(user: User) {
         self.init()
         self.user = user
@@ -36,6 +43,7 @@ class ProfileController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.diffCalculator = CollectionViewDiffCalculator(collectionView: collectionView, initialSectionedValues: self.stuff)
     }
     
     func configureCollectionView() {
@@ -76,13 +84,19 @@ extension ProfileController: UICollectionViewDelegate {
 
 extension ProfileController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        guard let diffCalculator = diffCalculator else { return 0 }
+        return diffCalculator.numberOfSections()
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        guard let diffCalculator = self.diffCalculator else { return 0 }
+        return diffCalculator.numberOfObjects(inSection: section)
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.reuseIdentifier, for: indexPath) as? ProfileCell else { return UICollectionViewCell() }
+        guard let diffCalculator = self.diffCalculator else { return cell }
+        let thing = diffCalculator.value(atIndexPath: indexPath)
+        cell.label.text = thing
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -122,12 +136,23 @@ extension ProfileController: ProfileHeaderDelegate {
             print("\(user) is me")
         }
         else if user.isFollowed {
-            print("\(user) is followed")
-        }
-        else {
-            UserService.follow(uid: user.uid).then { result in
-                print(result)
+            UserService.unfollow(uid: user.uid)
+                .then(on: DispatchQueue.main) { [weak self] result in
+                    guard let self = self, result == true else { return }
+                    self.user?.isFollowed = false
+                    self.collectionView.reloadData()
             }
         }
+        else {
+            UserService.follow(uid: user.uid)
+                .then(on: DispatchQueue.main) { [weak self] result in
+                    guard let self = self, result == true else { return }
+                    self.user?.isFollowed = true
+                    self.collectionView.reloadData()
+            }
+        }
+    }
+    func shuffle() {
+        self.stuff = Stuff.userStuff()
     }
 }

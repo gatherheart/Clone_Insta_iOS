@@ -12,6 +12,7 @@
 		5D02E29E26209B3F00551F66 /* LoginViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D02E29D26209B3F00551F66 /* LoginViewPresenter.swift */; };
 		5D03453B262DDB110076D86E /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D03453A262DDB110076D86E /* ProfileCell.swift */; };
 		5D034543262DDB250076D86E /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D034542262DDB250076D86E /* ProfileHeader.swift */; };
+		5D1CE4FA263B217000997D5F /* Stuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1CE4F9263B217000997D5F /* Stuff.swift */; };
 		5D4CF092262173FE009C33EC /* RegistrationViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4CF091262173FE009C33EC /* RegistrationViewPresenter.swift */; };
 		5D5B6B2E26371DF00092BB8F /* UserCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5B6B2D26371DF00092BB8F /* UserCellViewModel.swift */; };
 		5D7BC4ED261B73CB00426D53 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4EC261B73CB00426D53 /* FeedController.swift */; };
@@ -78,6 +79,7 @@
 		5D034535262DD0020076D86E /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5D03453A262DDB110076D86E /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		5D034542262DDB250076D86E /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		5D1CE4F9263B217000997D5F /* Stuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stuff.swift; sourceTree = "<group>"; };
 		5D4CF091262173FE009C33EC /* RegistrationViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewPresenter.swift; sourceTree = "<group>"; };
 		5D5B6B2D26371DF00092BB8F /* UserCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellViewModel.swift; sourceTree = "<group>"; };
 		5D7BC4EC261B73CB00426D53 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 			children = (
 				5DCEEA472624991C00B220F6 /* AuthModel.swift */,
 				5D895DE9262F4133003FFF1D /* User.swift */,
+				5D1CE4F9263B217000997D5F /* Stuff.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -590,6 +593,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D1CE4FA263B217000997D5F /* Stuff.swift in Sources */,
 				5D895DE0262F3F5C003FFF1D /* UserService.swift in Sources */,
 				5DCEEA5026249E5A00B220F6 /* FirestoreManager.swift in Sources */,
 				5DE8FA03261CC82B0097BE3E /* CustomTextField.swift in Sources */,

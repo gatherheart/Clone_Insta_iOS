@@ -219,6 +219,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.7):
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
+  - Dwifft (0.9)
   - Firebase/Analytics (7.10.0):
     - Firebase/Core
   - Firebase/Auth (7.10.0):
@@ -376,6 +377,7 @@ PODS:
 
 DEPENDENCIES:
   - ActiveLabel
+  - Dwifft
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -395,6 +397,7 @@ SPEC REPOS:
     - abseil
     - ActiveLabel
     - BoringSSL-GRPC
+    - Dwifft
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -428,6 +431,7 @@ SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
+  Dwifft: 42912068ed2a8146077d1a1404df18625bd086e1
   Firebase: fffddd0bab8677d07376538365faa93ff3889b39
   FirebaseAnalytics: 4641d7ae4220174f6ca5626163ffc5de2e90391e
   FirebaseAuth: 675f2c4eb4426e7c58a78a89965a6530e7863535
@@ -457,6 +461,6 @@ SPEC CHECKSUMS:
   SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
   YPImagePicker: 6f410f475bd22fa8cd430495b54d4b2f15865c2d
 
-PODFILE CHECKSUM: 5d26f447f5f58d0a4d11d8dc0ea562b4f9190759
+PODFILE CHECKSUM: 05bcf5829dfa6558fffb9bbce787a321f998c473
 
 COCOAPODS: 1.10.1
