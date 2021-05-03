@@ -26,9 +26,10 @@ class ProfileController: UIViewController {
     }
     var diffCalculator: CollectionViewDiffCalculator<String, String>?
 
-    convenience init(user: User) {
-        self.init()
+    init(user: User) {
         self.user = user
+        super.init(nibName: nil, bundle: nil)
+        commonInit()
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
