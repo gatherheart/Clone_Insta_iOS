@@ -94,4 +94,18 @@ struct UserService {
             }
         }
     }
+    
+    static func isFollowed(uid: String) -> Promise<Bool> {
+        return Promise { fulfill, reject in
+            guard let myId = UserService.myId() else { return }
+            let followingDocument = FireBaseCollections.following.document(myId).collection(UserCollections.userFollowing.rawValue)
+            followingDocument.document(uid).getDocument() { snapshot, error in
+                guard let isFollowed = snapshot?.exists else { fulfill(false); return }
+                if let error = error {
+                    reject(error)
+                }
+                fulfill(isFollowed)
+            }
+        }
+    }
 }
