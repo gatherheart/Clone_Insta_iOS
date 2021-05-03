@@ -45,7 +45,7 @@ class ProfileHeader: UICollectionReusableView {
         let label: UILabel = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.attributedText = attributedStatText(value: 1, label: "posts")
+        label.attributedText = viewModel?.numberOfPosts
         return label
     }()
 
@@ -53,7 +53,7 @@ class ProfileHeader: UICollectionReusableView {
         let label: UILabel = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.attributedText = attributedStatText(value: 2, label: "followers")
+        label.attributedText = viewModel?.numberOfFollowers
         return label
     }()
 
@@ -61,7 +61,7 @@ class ProfileHeader: UICollectionReusableView {
         let label: UILabel = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.attributedText = attributedStatText(value: 1, label: "following")
+        label.attributedText = viewModel?.numberOfFollowing
         return label
     }()
 
@@ -162,28 +162,28 @@ class ProfileHeader: UICollectionReusableView {
         }
     }
     private func setPostLabel() {
-//        self.addSubview(postLabel)
-//        postLabel.snp.makeConstraints { make in
-//            make.top.equalTo(name.snp.bottom).offset(16)
-//            make.left.equalTo(self.snp.left).inset(24)
-//            make.right.equalTo(self.snp.right).inset(24)
-//        }
+        self.addSubview(postLabel)
+        postLabel.snp.makeConstraints { make in
+            make.top.equalTo(name.snp.bottom).offset(16)
+            make.left.equalTo(self.snp.left).inset(24)
+            make.right.equalTo(self.snp.right).inset(24)
+        }
     }
     private func setFollowersLabel() {
-//        self.addSubview(followersLabel)
-//        followersLabel.snp.makeConstraints { make in
-//            make.top.equalTo(name.snp.bottom).offset(16)
-//            make.left.equalTo(self.snp.left).inset(24)
-//            make.right.equalTo(self.snp.right).inset(24)
-//        }
+        self.addSubview(followersLabel)
+        followersLabel.snp.makeConstraints { make in
+            make.top.equalTo(name.snp.bottom).offset(16)
+            make.left.equalTo(self.snp.left).inset(24)
+            make.right.equalTo(self.snp.right).inset(24)
+        }
     }
     private func setFollowingLabel() {
-//        self.addSubview(followingLabel)
-//        followingLabel.snp.makeConstraints { make in
-//            make.top.equalTo(name.snp.bottom).offset(16)
-//            make.left.equalTo(self.snp.left).inset(24)
-//            make.right.equalTo(self.snp.right).inset(24)
-//        }
+        self.addSubview(followingLabel)
+        followingLabel.snp.makeConstraints { make in
+            make.top.equalTo(name.snp.bottom).offset(16)
+            make.left.equalTo(self.snp.left).inset(24)
+            make.right.equalTo(self.snp.right).inset(24)
+        }
     }
     private func setLabelStackView() {
         self.addSubview(labelStackView)
@@ -261,14 +261,8 @@ class ProfileHeader: UICollectionReusableView {
         editProfile.setTitle(viewModel.followButtonText, for: .normal)
         editProfile.setTitleColor(viewModel.followButtonTextColor, for: .normal)
         editProfile.backgroundColor = viewModel.followButtonBackgroundColor
-    }
-}
-
-// MARK: - Helper
-extension ProfileHeader {
-    private func attributedStatText(value: Int, label: String) -> NSAttributedString {
-        let attributedText: NSMutableAttributedString = NSMutableAttributedString(string: "\(value)\n", attributes: [.font : UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: label, attributes: [.font : UIFont.systemFont(ofSize: 14), .foregroundColor : UIColor.lightGray]))
-        return attributedText
+        postLabel.attributedText = viewModel.numberOfPosts
+        followersLabel.attributedText = viewModel.numberOfFollowers
+        followingLabel.attributedText = viewModel.numberOfFollowing
     }
 }

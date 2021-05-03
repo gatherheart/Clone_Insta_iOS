@@ -26,6 +26,7 @@ class MainTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
+        fetchUser()
     }
     
     override func viewDidAppear(_ animated: Bool) {

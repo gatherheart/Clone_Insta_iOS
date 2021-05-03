@@ -18,6 +18,7 @@ struct User: Hashable {
     var isMe: Bool {
         return UserService.isMe(uid: self.uid)
     }
+    var stats: UserStats
 
     init(from dictionary: [String: Any]) {
         self.email = dictionary["email"] as? String ?? ""
@@ -25,6 +26,7 @@ struct User: Hashable {
         self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? ""
         self.username = dictionary["username"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""
+        self.stats = UserStats(followers: 0, following: 0)
     }
     
     func hash(into hasher: inout Hasher) {
@@ -35,4 +37,9 @@ struct User: Hashable {
         return lhs.identifier == rhs.identifier
     }
 
+}
+
+struct UserStats {
+    var followers: Int = 0
+    var following: Int = 0
 }

@@ -58,13 +58,13 @@ struct UserService {
         return Promise<Bool> { fulfill, reject in
             guard let myId = UserService.myId() else { return }
             let followingDocument = FireBaseCollections.following.document(myId).collection(UserCollections.userFollowing.rawValue)
-            let follwersDocument = FireBaseCollections.following.document(uid).collection(UserCollections.userFollowers.rawValue)
+            let followersDocument = FireBaseCollections.following.document(uid).collection(UserCollections.userFollowers.rawValue)
 
             followingDocument.document(uid).setData([:]) { error in
                 if let error = error {
                     reject(error)
                 }
-                follwersDocument.document(myId).setData([:]) { error in
+                followersDocument.document(myId).setData([:]) { error in
                     if let error = error {
                         reject(error)
                     }
@@ -79,13 +79,13 @@ struct UserService {
         return Promise<Bool> { fulfill, reject in
             guard let myId = UserService.myId() else { return }
             let followingDocument = FireBaseCollections.following.document(myId).collection(UserCollections.userFollowing.rawValue)
-            let follwersDocument = FireBaseCollections.following.document(uid).collection(UserCollections.userFollowers.rawValue)
+            let followersDocument = FireBaseCollections.following.document(uid).collection(UserCollections.userFollowers.rawValue)
             
             followingDocument.document(uid).delete() { error in
                 if let error = error {
                     reject(error)
                 }
-                follwersDocument.document(myId).delete() { error in
+                followersDocument.document(myId).delete() { error in
                     if let error = error {
                         reject(error)
                     }
@@ -107,5 +107,25 @@ struct UserService {
                 fulfill(isFollowed)
             }
         }
+    }
+    
+    static func fetchUserStats(uid: String) -> Promise<UserStats> {
+        return Promise { fulfill, reject in
+            let followingDocument = FireBaseCollections.following.document(uid).collection(UserCollections.userFollowing.rawValue)
+            let followersDocument = FireBaseCollections.following.document(uid).collection(UserCollections.userFollowers.rawValue)
+            
+            followingDocument.getDocuments { snapshot, error in
+                if let error = error {
+                    reject(error)
+                }
+                let followings = snapshot?.count ?? 0
+                followersDocument.getDocuments { snapshot, error in
+                    let followers = snapshot?.count ?? 0
+                    fulfill(UserStats(followers: followers, following: followings))
+                }
+                
+            }
+        }
+        
     }
 }

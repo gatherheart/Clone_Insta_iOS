@@ -46,6 +46,7 @@ class ProfileController: UIViewController {
         super.viewDidLoad()
         self.diffCalculator = CollectionViewDiffCalculator(collectionView: collectionView, initialSectionedValues: self.stuff)
         checkFollow()
+        fetchUserStats()
     }
     
     func configureCollectionView() {
@@ -83,6 +84,15 @@ class ProfileController: UIViewController {
         UserService.isFollowed(uid: userId)
             .then { isFollowed in
                 self.user?.isFollowed = isFollowed
+                self.collectionView.reloadData()
+            }
+    }
+    
+    private func fetchUserStats() {
+        guard let userId = user?.uid else { return }
+        UserService.fetchUserStats(uid: userId)
+            .then { userStats in
+                self.user?.stats = userStats
                 self.collectionView.reloadData()
             }
     }
