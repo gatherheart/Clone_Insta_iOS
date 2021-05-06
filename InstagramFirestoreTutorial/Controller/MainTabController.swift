@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import YPImagePicker
 
 class MainTabController: UITabBarController {
     
@@ -25,6 +26,7 @@ class MainTabController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.delegate = self
         configureViewController()
         fetchUser()
     }
@@ -71,5 +73,38 @@ extension MainTabController: AuthenticationDelegate {
         print("DEBUG: Auth did complete. Fetch user and update here...")
         fetchUser()
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - UITabBarControllerDelegate
+extension MainTabController: UITabBarControllerDelegate {
+    private func didFinishPickingMeida(_ picker: YPImagePicker) {
+        picker.didFinishPicking { items, _ in
+            picker.dismiss(animated: true) {
+                guard let selected = items.singlePhoto?.image else { return }
+                print("Debug Selected Image : \(selected)")
+            }
+        }
+    }
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        guard let selected = (viewController as? UINavigationController)?.viewControllers.first else {
+            return false
+        }
+        if selected is ImageSelectorController {
+            var config: YPImagePickerConfiguration = YPImagePickerConfiguration()
+            config.library.mediaType = .photo
+            config.shouldSaveNewPicturesToAlbum = false
+            config.startOnScreen = .library
+            config.screens = [.library]
+            config.hidesStatusBar = true
+            config.hidesBottomBar = false
+            config.library.maxNumberOfItems = 1
+
+            let picker: YPImagePicker = YPImagePicker(configuration: config)
+            picker.modalPresentationStyle = .fullScreen
+            present(picker, animated: true, completion: nil)
+            didFinishPickingMeida(picker)
+        }
+        return true
     }
 }
