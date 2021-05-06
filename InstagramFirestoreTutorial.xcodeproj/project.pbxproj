@@ -15,6 +15,8 @@
 		5D1CE4FA263B217000997D5F /* Stuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1CE4F9263B217000997D5F /* Stuff.swift */; };
 		5D4CF092262173FE009C33EC /* RegistrationViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4CF091262173FE009C33EC /* RegistrationViewPresenter.swift */; };
 		5D5B6B2E26371DF00092BB8F /* UserCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5B6B2D26371DF00092BB8F /* UserCellViewModel.swift */; };
+		5D60F0392644450900CFDD75 /* UploadPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D60F0382644450900CFDD75 /* UploadPhotoViewController.swift */; };
+		5D60F03E2644487100CFDD75 /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D60F03D2644487100CFDD75 /* InputTextView.swift */; };
 		5D7BC4ED261B73CB00426D53 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4EC261B73CB00426D53 /* FeedController.swift */; };
 		5D7BC4F2261B73E200426D53 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4F1261B73E200426D53 /* SearchController.swift */; };
 		5D7BC4F7261B73EB00426D53 /* ImageSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4F6261B73EB00426D53 /* ImageSelectorController.swift */; };
@@ -82,6 +84,8 @@
 		5D1CE4F9263B217000997D5F /* Stuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stuff.swift; sourceTree = "<group>"; };
 		5D4CF091262173FE009C33EC /* RegistrationViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewPresenter.swift; sourceTree = "<group>"; };
 		5D5B6B2D26371DF00092BB8F /* UserCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellViewModel.swift; sourceTree = "<group>"; };
+		5D60F0382644450900CFDD75 /* UploadPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoViewController.swift; sourceTree = "<group>"; };
+		5D60F03D2644487100CFDD75 /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
 		5D7BC4EC261B73CB00426D53 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
 		5D7BC4F1261B73E200426D53 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		5D7BC4F6261B73EB00426D53 /* ImageSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorController.swift; sourceTree = "<group>"; };
@@ -269,6 +273,7 @@
 				5DE8F9DA261CAA330097BE3E /* FeedCollectionViewCell.swift */,
 				5DE8FA02261CC82B0097BE3E /* CustomTextField.swift */,
 				5D8360F526301C0900E976A9 /* UserCell.swift */,
+				5D60F03D2644487100CFDD75 /* InputTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				5D7BC4F6261B73EB00426D53 /* ImageSelectorController.swift */,
 				5D7BC4FB261B73FA00426D53 /* NotificationController.swift */,
 				5D7BC500261B740700426D53 /* ProfileController.swift */,
+				5D60F0382644450900CFDD75 /* UploadPhotoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -599,6 +605,7 @@
 				5DE8FA03261CC82B0097BE3E /* CustomTextField.swift in Sources */,
 				5DC992B72629D34A0013CACB /* ImageUploader.swift in Sources */,
 				5DBAE982261A27E700F16CCB /* ViewController.swift in Sources */,
+				5D60F03E2644487100CFDD75 /* InputTextView.swift in Sources */,
 				5D5B6B2E26371DF00092BB8F /* UserCellViewModel.swift in Sources */,
 				5D895DE5262F3F95003FFF1D /* Constants.swift in Sources */,
 				5DC065BE261D9A5900397954 /* AuthenticationViewModel.swift in Sources */,
@@ -617,6 +624,7 @@
 				5D7BC4F2261B73E200426D53 /* SearchController.swift in Sources */,
 				5DBAE97E261A27E700F16CCB /* AppDelegate.swift in Sources */,
 				5DCEEA43262498C100B220F6 /* AuthRequest.swift in Sources */,
+				5D60F0392644450900CFDD75 /* UploadPhotoViewController.swift in Sources */,
 				5D7BC501261B740700426D53 /* ProfileController.swift in Sources */,
 				5DC065B9261D8D6500397954 /* BackgroundFactory.swift in Sources */,
 				5D7BC4ED261B73CB00426D53 /* FeedController.swift in Sources */,

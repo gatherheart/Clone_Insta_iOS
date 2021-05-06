@@ -82,7 +82,10 @@ extension MainTabController: UITabBarControllerDelegate {
         picker.didFinishPicking { items, _ in
             picker.dismiss(animated: true) {
                 guard let selected = items.singlePhoto?.image else { return }
-                print("Debug Selected Image : \(selected)")
+                let uploadPostVC = UploadPhotoViewController(photo: selected)
+                let nav = UINavigationController(rootViewController: uploadPostVC)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: false, completion: nil)
             }
         }
     }
