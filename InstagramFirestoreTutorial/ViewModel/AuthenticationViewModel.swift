@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 struct LoginViewModel {
     var email: String?
     var password: String?

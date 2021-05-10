@@ -13,6 +13,8 @@
 		5D03453B262DDB110076D86E /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D03453A262DDB110076D86E /* ProfileCell.swift */; };
 		5D034543262DDB250076D86E /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D034542262DDB250076D86E /* ProfileHeader.swift */; };
 		5D1CE4FA263B217000997D5F /* Stuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1CE4F9263B217000997D5F /* Stuff.swift */; };
+		5D27E7BD2649860A00588F93 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D27E7BC2649860A00588F93 /* PostService.swift */; };
+		5D27E7C22649876700588F93 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D27E7C12649876700588F93 /* PostViewModel.swift */; };
 		5D4CF092262173FE009C33EC /* RegistrationViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4CF091262173FE009C33EC /* RegistrationViewPresenter.swift */; };
 		5D5B6B2E26371DF00092BB8F /* UserCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5B6B2D26371DF00092BB8F /* UserCellViewModel.swift */; };
 		5D60F0392644450900CFDD75 /* UploadPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D60F0382644450900CFDD75 /* UploadPhotoViewController.swift */; };
@@ -82,6 +84,8 @@
 		5D03453A262DDB110076D86E /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		5D034542262DDB250076D86E /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		5D1CE4F9263B217000997D5F /* Stuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stuff.swift; sourceTree = "<group>"; };
+		5D27E7BC2649860A00588F93 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		5D27E7C12649876700588F93 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		5D4CF091262173FE009C33EC /* RegistrationViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewPresenter.swift; sourceTree = "<group>"; };
 		5D5B6B2D26371DF00092BB8F /* UserCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellViewModel.swift; sourceTree = "<group>"; };
 		5D60F0382644450900CFDD75 /* UploadPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoViewController.swift; sourceTree = "<group>"; };
@@ -284,6 +288,7 @@
 				5DC065BD261D9A5900397954 /* AuthenticationViewModel.swift */,
 				5D8360C9262FE7FA00E976A9 /* ProfileHeaderViewModel.swift */,
 				5D5B6B2D26371DF00092BB8F /* UserCellViewModel.swift */,
+				5D27E7C12649876700588F93 /* PostViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 				5DCEEA42262498C100B220F6 /* AuthRequest.swift */,
 				5DCEEA4F26249E5A00B220F6 /* FirestoreManager.swift */,
 				5D895DDF262F3F5C003FFF1D /* UserService.swift */,
+				5D27E7BC2649860A00588F93 /* PostService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -602,6 +608,7 @@
 				5D1CE4FA263B217000997D5F /* Stuff.swift in Sources */,
 				5D895DE0262F3F5C003FFF1D /* UserService.swift in Sources */,
 				5DCEEA5026249E5A00B220F6 /* FirestoreManager.swift in Sources */,
+				5D27E7BD2649860A00588F93 /* PostService.swift in Sources */,
 				5DE8FA03261CC82B0097BE3E /* CustomTextField.swift in Sources */,
 				5DC992B72629D34A0013CACB /* ImageUploader.swift in Sources */,
 				5DBAE982261A27E700F16CCB /* ViewController.swift in Sources */,
@@ -616,6 +623,7 @@
 				5D4CF092262173FE009C33EC /* RegistrationViewPresenter.swift in Sources */,
 				5D7BC4F7261B73EB00426D53 /* ImageSelectorController.swift in Sources */,
 				5DCEEA5526249F2300B220F6 /* AuthUseCase.swift in Sources */,
+				5D27E7C22649876700588F93 /* PostViewModel.swift in Sources */,
 				5DE8F9DB261CAA330097BE3E /* FeedCollectionViewCell.swift in Sources */,
 				5DCEEA3B262493C700B220F6 /* NetworkManager.swift in Sources */,
 				5D7BC4FC261B73FA00426D53 /* NotificationController.swift in Sources */,

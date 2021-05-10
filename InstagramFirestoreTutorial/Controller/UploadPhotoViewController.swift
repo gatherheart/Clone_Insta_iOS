@@ -7,14 +7,29 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+
+typealias PostData = [String: Any]
+
+protocol UploadPhotoViewControllerDelegate: AnyObject {
+    func uploadPhotoViewController(_ controller: UploadPhotoViewController, didFinishUploading data: PostData)
+}
 
 class UploadPhotoViewController: UIViewController {
-
-    let maxLengthOfTextView: UInt = 100
     
+    weak var delegate: UploadPhotoViewControllerDelegate?
+    //https://stackoverflow.com/questions/25230780/is-it-possible-to-allow-didset-to-be-called-during-initialization-in-swift
+    var selectedImage: UIImage? {
+        didSet {
+            photoImageView.image = selectedImage
+            print(photoImageView.image)
+        }
+    }
+    let maxLengthOfTextView: UInt = 100
+    let disposeBag: DisposeBag = DisposeBag()
+
     private let photoImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.image = UIImage(named: "venom-7")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
@@ -38,6 +53,7 @@ class UploadPhotoViewController: UIViewController {
     init(photo: UIImage) {
         super.init(nibName: nil, bundle: nil)
         print("selected ", photo)
+        self.photoImageView.image = photo
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -102,7 +118,22 @@ class UploadPhotoViewController: UIViewController {
     }
 
     @objc private func didTapDone() {
-
+        guard let image = self.photoImageView.image, let caption = captionTextView.text else { return }
+        selectedImage = self.photoImageView.image
+        var lastData: PostData = PostData()
+        PostService.uploadPost(caption: caption, image: image)
+            .subscribe { event in
+                switch event {
+                case .next(let data):
+                    print(data)
+                    lastData = data
+                case .error(let error):
+                    print(error)
+                case .completed:
+                    self.delegate?.uploadPhotoViewController(self, didFinishUploading: lastData)
+                }
+            }
+            .disposed(by: self.disposeBag)
     }
 
 }

@@ -21,7 +21,9 @@ target 'InstagramFirestoreTutorial' do
   pod 'JGProgressHUD','~>2.0.3'
   pod 'YPImagePicker'
   pod 'Dwifft'
-
+  pod 'RxSwift', '~> 6.2.0'
+  pod 'RxCocoa', '~> 6.2.0'
+  
   target 'InstagramFirestoreTutorialTests' do
     inherit! :search_paths
     # Pods for testing
