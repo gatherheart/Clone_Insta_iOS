@@ -10,7 +10,6 @@ import RxSwift
 import Firebase
 
 struct PostService {
-    typealias PostData = [String: Any]
     static func uploadPost(caption: String, image: UIImage) -> Observable<PostData> {
         return Observable<PostData>.create { observer -> Disposable in
             guard let uid = Auth.auth().currentUser?.uid else {
@@ -31,6 +30,21 @@ struct PostService {
             }
             return Disposables.create()
         }
-        
+    }
+    
+    static func fetchPosts() -> Observable<[Post]> {
+        return Observable<[Post]>.create { observer -> Disposable in
+            FireBaseCollections.posts.getDocuments { (snapshot, error) in
+                guard let documents = snapshot?.documents else {
+                    observer.onError(NSError(domain: "ERROR Fetch Post", code: 0, userInfo: nil))
+                    return
+                }
+
+                let posts: [Post] = documents.map { Post(postId: $0.documentID, dictionary: $0.data()) }
+                observer.onNext(posts)
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }
     }
 }

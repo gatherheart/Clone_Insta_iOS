@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import RxSwift
 
 class FeedController: UIViewController {
     
+    let disposeBag: DisposeBag = DisposeBag()
+    private var posts: [Post] = []
+
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
@@ -31,6 +35,7 @@ class FeedController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .green
+        fetchPosts()
     }
     
     private func commonInit() {
@@ -49,6 +54,19 @@ class FeedController: UIViewController {
         collectionView.backgroundColor = .white
         collectionView.register(FeedCollectionViewCell.self, forCellWithReuseIdentifier: FeedCollectionViewCell.reuseIdentifier)
         self.view.addSubview(collectionView)
+    }
+    
+    private func fetchPosts() {
+        PostService.fetchPosts().subscribe { (posts) in
+            print(posts)
+            self.posts = posts
+        } onError: { (error) in
+            print(error)
+        } onCompleted: {
+            print("completed fetching posts")
+            self.collectionView.reloadData()
+        } onDisposed: {
+        }.disposed(by: disposeBag)
     }
     
     @objc
@@ -70,7 +88,7 @@ class FeedController: UIViewController {
 
 extension FeedController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return posts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

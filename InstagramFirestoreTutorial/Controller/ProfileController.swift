@@ -153,6 +153,7 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
 
 extension ProfileController: ProfileHeaderDelegate {
     func header(_ profileHeader: ProfileHeader, didTapActionButtonFor user: User) {
+        self.shuffle()
         if user.isMe {
             print("\(user) is me")
         }

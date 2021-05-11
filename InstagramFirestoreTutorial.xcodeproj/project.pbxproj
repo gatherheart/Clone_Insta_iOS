@@ -19,6 +19,7 @@
 		5D5B6B2E26371DF00092BB8F /* UserCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5B6B2D26371DF00092BB8F /* UserCellViewModel.swift */; };
 		5D60F0392644450900CFDD75 /* UploadPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D60F0382644450900CFDD75 /* UploadPhotoViewController.swift */; };
 		5D60F03E2644487100CFDD75 /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D60F03D2644487100CFDD75 /* InputTextView.swift */; };
+		5D786419264AE6DC00F986A7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D786418264AE6DC00F986A7 /* Post.swift */; };
 		5D7BC4ED261B73CB00426D53 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4EC261B73CB00426D53 /* FeedController.swift */; };
 		5D7BC4F2261B73E200426D53 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4F1261B73E200426D53 /* SearchController.swift */; };
 		5D7BC4F7261B73EB00426D53 /* ImageSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7BC4F6261B73EB00426D53 /* ImageSelectorController.swift */; };
@@ -90,6 +91,7 @@
 		5D5B6B2D26371DF00092BB8F /* UserCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellViewModel.swift; sourceTree = "<group>"; };
 		5D60F0382644450900CFDD75 /* UploadPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoViewController.swift; sourceTree = "<group>"; };
 		5D60F03D2644487100CFDD75 /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
+		5D786418264AE6DC00F986A7 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		5D7BC4EC261B73CB00426D53 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
 		5D7BC4F1261B73E200426D53 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		5D7BC4F6261B73EB00426D53 /* ImageSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorController.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				5DCEEA472624991C00B220F6 /* AuthModel.swift */,
 				5D895DE9262F4133003FFF1D /* User.swift */,
 				5D1CE4F9263B217000997D5F /* Stuff.swift */,
+				5D786418264AE6DC00F986A7 /* Post.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				5D60F0392644450900CFDD75 /* UploadPhotoViewController.swift in Sources */,
 				5D7BC501261B740700426D53 /* ProfileController.swift in Sources */,
 				5DC065B9261D8D6500397954 /* BackgroundFactory.swift in Sources */,
+				5D786419264AE6DC00F986A7 /* Post.swift in Sources */,
 				5D7BC4ED261B73CB00426D53 /* FeedController.swift in Sources */,
 				5DEEEDC2261B6FAB00672FBA /* MainTabController.swift in Sources */,
 				5DBAE980261A27E700F16CCB /* SceneDelegate.swift in Sources */,
