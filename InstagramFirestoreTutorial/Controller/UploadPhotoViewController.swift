@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import RxSwift
+import JGProgressHUD
 
 typealias PostData = [String: Any]
 
@@ -27,6 +28,7 @@ class UploadPhotoViewController: UIViewController {
     }
     let maxLengthOfTextView: UInt = 100
     let disposeBag: DisposeBag = DisposeBag()
+    let progressIndicator: JGProgressHUD = JGProgressHUD(style: .dark)
 
     private let photoImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
@@ -121,6 +123,8 @@ class UploadPhotoViewController: UIViewController {
         guard let image = self.photoImageView.image, let caption = captionTextView.text else { return }
         selectedImage = self.photoImageView.image
         var lastData: PostData = PostData()
+        showLoader(true)
+        
         PostService.uploadPost(caption: caption, image: image)
             .subscribe { event in
                 switch event {
@@ -131,9 +135,19 @@ class UploadPhotoViewController: UIViewController {
                     print(error)
                 case .completed:
                     self.delegate?.uploadPhotoViewController(self, didFinishUploading: lastData)
+                    self.showLoader(false)
                 }
             }
             .disposed(by: self.disposeBag)
+    }
+    
+    private func showLoader(_ show: Bool) {
+        view.endEditing(true)
+        if show {
+            self.progressIndicator.show(in: view)
+        } else {
+            self.progressIndicator.dismiss()
+        }
     }
 
 }
