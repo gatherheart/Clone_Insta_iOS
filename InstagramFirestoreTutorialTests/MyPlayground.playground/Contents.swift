@@ -133,3 +133,78 @@ var b = a
 b.size = CGSize(width: 20, height: 20)
 print(a)
 print(b)
+
+
+protocol Container {
+    associatedtype Item
+    mutating func append(_ item: Item)
+    var count: Int { get }
+    subscript(i: Int) -> Item { get }
+}
+
+struct IntStack: Container {
+    typealias Item = Int
+
+    // original IntStack implementation
+    var items = [Int]()
+    mutating func push(_ item: Int) {
+        items.append(item)
+    }
+    mutating func pop() -> Int {
+        return items.removeLast()
+    }
+    // conformance to the Container protocol
+    mutating func append(_ item: Int) {
+        self.push(item)
+    }
+    var count: Int {
+        return items.count
+    }
+    subscript(i: Int) -> Int {
+        return items[i]
+    }
+}
+
+struct Stack<Element>: Container {
+    // original Stack<Element> implementation
+    var items = [Element]()
+    mutating func push(_ item: Element) {
+        items.append(item)
+    }
+    mutating func pop() -> Element {
+        return items.removeLast()
+    }
+    // conformance to the Container protocol
+    mutating func append(_ item: Element) {
+        self.push(item)
+    }
+    var count: Int {
+        return items.count
+    }
+    subscript(i: Int) -> Element {
+        return items[i]
+    }
+}
+
+let stack1: some Container = IntStack()
+let stack2: some Container = Stack<Int>()
+
+print(type(of: stack1))
+print(type(of: stack2))
+protocol ItemStoring {
+    associatedtype DataType
+
+    var items: [DataType] { get set}
+    mutating func add(item: DataType)
+}
+
+extension ItemStoring {
+    mutating func add(item: DataType) {
+        items.append(item)
+    }
+}
+
+struct NameDatabase: ItemStoring {
+    typealias DataType = String
+    var items = [String]()
+}
