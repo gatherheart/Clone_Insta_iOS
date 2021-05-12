@@ -7,11 +7,14 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
+import Kingfisher
 
 class FeedController: UIViewController {
     
     let disposeBag: DisposeBag = DisposeBag()
-    private var posts: [Post] = []
+    let viewModel = PostViewModel()
+    let posts = [Post]()
 
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -35,13 +38,12 @@ class FeedController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .green
-        fetchPosts()
+        setupBindings()
+        viewModel.fetch()
     }
     
     private func commonInit() {
         navigationItem.title = "Feed"
-        collectionView.delegate = self
-        collectionView.dataSource = self
         setCollectionView()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "logout",
                                                             style: .plain,
@@ -49,24 +51,23 @@ class FeedController: UIViewController {
                                                             action: #selector(logout))
     }
     
+    private func setupBindings() {
+        viewModel
+            .posts
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.collectionView.rx.items(cellIdentifier: FeedCollectionViewCell.reuseIdentifier)) { row, post, cell in
+                guard let cell: FeedCollectionViewCell = cell as? FeedCollectionViewCell else { return }
+                guard let source: URL = URL(string: post.imageUrl) else { return }
+                cell.postImage.kf.setImage(with: source)
+            }.disposed(by: disposeBag)
+    }
+    
     private func setCollectionView() {
+        collectionView.delegate = self
         collectionView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         collectionView.backgroundColor = .white
         collectionView.register(FeedCollectionViewCell.self, forCellWithReuseIdentifier: FeedCollectionViewCell.reuseIdentifier)
         self.view.addSubview(collectionView)
-    }
-    
-    private func fetchPosts() {
-        PostService.fetchPosts().subscribe { (posts) in
-            print(posts)
-            self.posts = posts
-        } onError: { (error) in
-            print(error)
-        } onCompleted: {
-            print("completed fetching posts")
-            self.collectionView.reloadData()
-        } onDisposed: {
-        }.disposed(by: disposeBag)
     }
     
     @objc
@@ -86,18 +87,8 @@ class FeedController: UIViewController {
     }
 }
 
-extension FeedController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCollectionViewCell.reuseIdentifier, for: indexPath) as? FeedCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        cell.backgroundColor = .red
-        return cell
-    }
+extension FeedController: UICollectionViewDelegate {
+
 }
 
 extension FeedController: UICollectionViewDelegateFlowLayout {

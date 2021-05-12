@@ -28,7 +28,7 @@ class FeedCollectionViewCell: UICollectionViewCell {
         button.addTarget(self, action: #selector(didTapUsername), for: .touchUpInside)
         return button
     }()
-    private let postImage: UIImageView = {
+    public var postImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
