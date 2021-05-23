@@ -39,6 +39,13 @@ class ProfileCell: UICollectionViewCell {
         setPostImage()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        post = nil
+        postImage.kf.cancelDownloadTask()
+        postImage.image = nil
+    }
+    
     func configure(post: Post) {
         self.post = post
         postImage.kf.setImage(with: URL(string: post.imageUrl))

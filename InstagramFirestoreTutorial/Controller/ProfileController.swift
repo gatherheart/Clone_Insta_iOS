@@ -55,6 +55,7 @@ class ProfileController: UIViewController {
     }
     
     deinit {
+        posts.removeAll()
         observations.removeAll()
     }
     
@@ -70,6 +71,8 @@ class ProfileController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        posts.removeAll()
+        observations.removeAll()
     }
     
     func configureCollectionView() {

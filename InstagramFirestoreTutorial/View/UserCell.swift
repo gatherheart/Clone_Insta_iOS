@@ -74,6 +74,12 @@ class UserCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        profileImage.kf.cancelDownloadTask()
+        profileImage.image = nil
+    }
+    
     private func configure() {
         guard let viewModel = viewModel else { return }
         usernameLabel.text = viewModel.username

@@ -15,7 +15,7 @@ class FeedController: UIViewController {
     
     let disposeBag: DisposeBag = DisposeBag()
     var user: User? = nil
-    let viewModel = PostViewModel()
+    var viewModel = PostViewModel()
     var observations: [NSKeyValueObservation] = [NSKeyValueObservation]()
     
     lazy private var refreshControl: UIRefreshControl = {
