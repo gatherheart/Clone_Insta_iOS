@@ -42,9 +42,11 @@ struct PostService {
                 var posts: [Post] = documents.map { Post(postId: $0.documentID, dictionary: $0.data()) }
                 posts = posts.map { post in
                     let userId = post.ownerUid
-                    UserService.fetchUser(uid: userId).then { user in
-                        post.ownerUsername = user.fullname
-                        post.ownerImageUrl = user.profileImageUrl
+                    DispatchQueue.global().async {
+                        UserService.fetchUser(uid: userId).then { user in
+                                post.ownerUsername = user.fullname
+                                post.ownerImageUrl = user.profileImageUrl
+                            }
                     }
                     return post
                 }
@@ -55,18 +57,21 @@ struct PostService {
         }
     }
     
-    static func fetchPosts(for uid: String) -> Observable<[Post]> {
+    static func fetchPosts(for uid: String?) -> Observable<[Post]> {
+        guard let uid = uid else { return PostService.fetchPosts() }
         return Observable<[Post]>.create { observer -> Disposable in
-            let query: Query = FireBaseCollections.posts.order(by: "timestamp", descending: true).whereField("ownerUid", isEqualTo: uid)
+            let query: Query = FireBaseCollections.posts.whereField("ownerUid", isEqualTo: uid)
             
             query.getDocuments { (snapshot, error) in
                 guard let documents = snapshot?.documents else { return }
                 var posts: [Post] = documents.map { Post(postId: $0.documentID, dictionary: $0.data()) }
                 posts = posts.map { post in
                     let userId = post.ownerUid
-                    UserService.fetchUser(uid: userId).then { user in
-                        post.ownerUsername = user.fullname
-                        post.ownerImageUrl = user.profileImageUrl
+                    DispatchQueue.global().async {
+                        UserService.fetchUser(uid: userId).then { user in
+                            post.ownerUsername = user.fullname
+                            post.ownerImageUrl = user.profileImageUrl
+                        }
                     }
                     return post
                 }

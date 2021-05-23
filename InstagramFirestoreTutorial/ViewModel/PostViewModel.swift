@@ -21,15 +21,18 @@ class PostViewModel {
     public let loading: PublishSubject<Bool> = PublishSubject()
     public let error : PublishSubject<PostError> = PublishSubject()
     
-    public func fetch() {
+    public func fetch(uid: String? = nil) {
         self.loading.onNext(true)
-        PostService.fetchPosts().subscribe { (posts) in
+        PostService.fetchPosts(for: uid).subscribe { [weak self] (posts) in
+            guard let self = self else { return }
             self.loading.onNext(false)
             self.posts.onNext(posts)
-        } onError: { (error) in
+        } onError: { [weak self] (error) in
+            guard let self = self else { return }
             self.loading.onNext(true)
             self.error.onNext(.clientError(error.localizedDescription))
-        } onCompleted: {
+        } onCompleted: { [weak self] in
+            guard let self = self else { return }
             self.loading.onNext(true)
             InfoLog("completed fetching posts")
         } onDisposed: {

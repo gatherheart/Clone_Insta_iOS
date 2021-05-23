@@ -53,6 +53,12 @@ class FeedController: UIViewController {
         viewModel.fetch()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        observations.removeAll()
+        InfoLog("[🙀] viewDidDisappear in FeedController - observations \(String(describing: observations.count))")
+    }
+    
     private func commonInit() {
         navigationItem.title = "Feed"
         setCollectionView()
@@ -71,7 +77,9 @@ class FeedController: UIViewController {
                 cell.configure(post: post)
                 let observation = post.observe(\.ownerImageUrl, options: [.new]) { post, change in
                     InfoLog("[🙀] NEW in observation \(String(describing: change.newValue))")
-                    self.collectionView.reloadData()
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
                 }
                 self.observations.append(observation)
             }.disposed(by: disposeBag)

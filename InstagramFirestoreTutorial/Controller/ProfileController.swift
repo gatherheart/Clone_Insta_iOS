@@ -7,10 +7,21 @@
 
 import UIKit
 import Dwifft
+import RxSwift
+import RxCocoa
 
 class ProfileController: UIViewController {
-    
-    var user: User?
+    var disposeBag: DisposeBag?
+    var user: User? {
+        didSet {
+            InfoLog("Current Profile User \(user?.fullname) \(user?.email)")
+            self.collectionView.reloadSections(IndexSet(integer: 0))
+        }
+    }
+    var posts: [Post] = [Post]()
+    var viewModel = PostViewModel()
+    var observations: [NSKeyValueObservation] = [NSKeyValueObservation]()
+
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
@@ -19,12 +30,12 @@ class ProfileController: UIViewController {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return cv
     }()
-    var stuff: SectionedValues<String, String> = Stuff.userStuff() {
+    lazy var stuff: SectionedValues<String, Post> = sectionedValues() {
         didSet {
             self.diffCalculator?.sectionedValues = stuff
         }
     }
-    var diffCalculator: CollectionViewDiffCalculator<String, String>?
+    var diffCalculator: CollectionViewDiffCalculator<String, Post>?
 
     init(user: User) {
         self.user = user
@@ -42,11 +53,23 @@ class ProfileController: UIViewController {
         commonInit()
     }
     
+    deinit {
+        observations.removeAll()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.diffCalculator = CollectionViewDiffCalculator(collectionView: collectionView, initialSectionedValues: self.stuff)
+        self.diffCalculator = CollectionViewDiffCalculator(collectionView: collectionView, initialSectionedValues: sectionedValues())
         checkFollow()
         fetchUserStats()
+        fetchPosts()
+        InfoLog("Current Profile User \(user?.fullname) \(user?.email) \(posts.count)")
+        disposeBag = DisposeBag()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disposeBag = nil
     }
     
     func configureCollectionView() {
@@ -58,6 +81,7 @@ class ProfileController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         setCollectionView()
+        setupBindings()
     }
     
     private func setCollectionView() {
@@ -73,8 +97,9 @@ class ProfileController: UIViewController {
         UserService.fetchUser().then { user in
             self.user = user
             self.navigationItem.title = user.username
+            self.collectionView.reloadData()
         }.catch { error in
-            InfoLog(error.localizedDescription)
+            ErrorLog(error.localizedDescription)
         }
     }
     
@@ -95,10 +120,36 @@ class ProfileController: UIViewController {
                 self.collectionView.reloadData()
             }
     }
+    
+    private func fetchPosts() {
+        viewModel.fetch(uid: user?.uid)
+    }
+    
+    private func setupBindings() {
+        viewModel.posts
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] posts in
+                guard let self = self else { return }
+                InfoLog("viewModel \(posts.count)")
+                self.posts = posts
+                self.stuff = self.sectionedValues()
+            }, onError: { Error in
+                ErrorLog("[🥶] Error in binding data")
+            }).disposed(by: disposeBag!)
+    }
+    
+    private func sectionedValues() -> SectionedValues<String, Post> {
+        var stuff = [(String, [Post])]()
+        stuff.append(("", self.posts))
+        return SectionedValues(stuff)
+    }
 }
 
 extension ProfileController: UICollectionViewDelegate {
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let feedVC: FeedController = FeedController()
+        navigationController?.pushViewController(feedVC, animated: true)
+    }
 }
 
 
@@ -115,8 +166,8 @@ extension ProfileController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.reuseIdentifier, for: indexPath) as? ProfileCell else { return UICollectionViewCell() }
         guard let diffCalculator = self.diffCalculator else { return cell }
-        let thing = diffCalculator.value(atIndexPath: indexPath)
-        cell.label.text = thing
+        let post = diffCalculator.value(atIndexPath: indexPath)
+        cell.configure(post: post)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -152,7 +203,6 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
 
 extension ProfileController: ProfileHeaderDelegate {
     func header(_ profileHeader: ProfileHeader, didTapActionButtonFor user: User) {
-        self.shuffle()
         if user.isMe {
             print("\(user) is me")
         }
@@ -172,8 +222,5 @@ extension ProfileController: ProfileHeaderDelegate {
                     self.collectionView.reloadData()
             }
         }
-    }
-    func shuffle() {
-        self.stuff = Stuff.userStuff()
     }
 }

@@ -7,10 +7,12 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class ProfileCell: UICollectionViewCell {
     
     static let reuseIdentifier = "ProfileCell"
+    private var post: Post?
     
     private let postImage: UIImageView = {
         let imageView: UIImageView = UIImageView()
@@ -35,6 +37,11 @@ class ProfileCell: UICollectionViewCell {
     private func commonInit() {
         backgroundColor = .gray
         setPostImage()
+    }
+    
+    func configure(post: Post) {
+        self.post = post
+        postImage.kf.setImage(with: URL(string: post.imageUrl))
     }
     
     private func setPostImage() {

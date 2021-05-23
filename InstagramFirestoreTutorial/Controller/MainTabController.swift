@@ -15,12 +15,7 @@ class MainTabController: UITabBarController {
     private var imageSelector: UINavigationController!
     private var notifications: UINavigationController!
     private var profile: UINavigationController!
-    private var user: User? {
-        didSet {
-            guard let user = user else { return }
-            setUserForViewControllers(with: user)
-        }
-    }
+    private var user: User?
     
     // MARK: - LifeCycle
     
@@ -67,6 +62,7 @@ extension MainTabController: AuthenticationDelegate {
     private func fetchUser() {
         UserService.fetchUser().then { user in
             self.user = user
+            self.setUserForViewControllers(with: user)
         }
     }
     func didAuthenticationComplete() {
