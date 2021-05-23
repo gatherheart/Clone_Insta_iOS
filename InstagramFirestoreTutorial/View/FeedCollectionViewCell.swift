@@ -170,7 +170,6 @@ class FeedCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(post: Post) {
-        print("configure", post)
         if let source: URL = URL(string: post.imageUrl) {
             self.postImage.kf.setImage(with: source)
         }
@@ -181,6 +180,6 @@ class FeedCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func didTapUsername() {
-        print("DEBUG: tapped username")
+        InfoLog("DEBUG: tapped username")
     }
 }

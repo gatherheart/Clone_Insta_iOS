@@ -71,11 +71,10 @@ class ProfileController: UIViewController {
     // MARK: - API
     private func fetchUser() {
         UserService.fetchUser().then { user in
-            print(user)
             self.user = user
             self.navigationItem.title = user.username
         }.catch { error in
-            print(error)
+            InfoLog(error.localizedDescription)
         }
     }
     

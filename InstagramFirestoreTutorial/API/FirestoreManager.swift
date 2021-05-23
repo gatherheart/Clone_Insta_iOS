@@ -27,7 +27,7 @@ class FirestoreManager: FirestoreManable {
         return Promise { fulfill, reject in
             to.putData(data, metadata: nil) { metaData, error in
                 if let error = error {
-                    print("DEBUG: Upload Failure \(String(describing: error.localizedDescription))")
+                    InfoLog("DEBUG: Upload Failure \(String(describing: error.localizedDescription))")
                     reject(error)
                 }
                 fulfill((to, metaData))

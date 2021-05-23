@@ -14,7 +14,7 @@ class PostObserver {
     func observe(post: Post) {
         profileImageObservation = post.observe(\.ownerImageUrl, options: .new) { (post, change) in
             guard let profileImage = change.newValue as String? else { return }
-            print("New is: \(profileImage)")
+            InfoLog("New is: \(profileImage)")
         }
     }
     

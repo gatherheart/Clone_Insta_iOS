@@ -54,4 +54,25 @@ struct PostService {
             return Disposables.create()
         }
     }
+    
+    static func fetchPosts(for uid: String) -> Observable<[Post]> {
+        return Observable<[Post]>.create { observer -> Disposable in
+            let query: Query = FireBaseCollections.posts.order(by: "timestamp", descending: true).whereField("ownerUid", isEqualTo: uid)
+            
+            query.getDocuments { (snapshot, error) in
+                guard let documents = snapshot?.documents else { return }
+                var posts: [Post] = documents.map { Post(postId: $0.documentID, dictionary: $0.data()) }
+                posts = posts.map { post in
+                    let userId = post.ownerUid
+                    UserService.fetchUser(uid: userId).then { user in
+                        post.ownerUsername = user.fullname
+                        post.ownerImageUrl = user.profileImageUrl
+                    }
+                    return post
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
 }

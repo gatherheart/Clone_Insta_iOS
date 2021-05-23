@@ -21,7 +21,7 @@ struct AuthRequest {
         return Promise { fulfill, reject in
             Auth.auth().createUser(withEmail: with.email, password: with.password) { (result, error) in
                 if let error = error {
-                    print("DEBUG ERROR: Register failure \(String(describing: error.localizedDescription))")
+                    ErrorLog("DEBUG ERROR: Register failure \(String(describing: error.localizedDescription))")
                     reject(error)
                 }
                 guard let uid = result?.user.uid else { reject(AuthErrors.badRequest); return }

@@ -31,6 +31,7 @@
 		5D895DE5262F3F95003FFF1D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D895DE4262F3F95003FFF1D /* Constants.swift */; };
 		5D895DEA262F4133003FFF1D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D895DE9262F4133003FFF1D /* User.swift */; };
 		5D91D41D265A3B2C00C53E3B /* PostObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D91D41C265A3B2C00C53E3B /* PostObserver.swift */; };
+		5D91D464265A461800C53E3B /* LogConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D91D463265A461800C53E3B /* LogConfig.swift */; };
 		5DBAE97E261A27E700F16CCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE97D261A27E700F16CCB /* AppDelegate.swift */; };
 		5DBAE980261A27E700F16CCB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE97F261A27E700F16CCB /* SceneDelegate.swift */; };
 		5DBAE982261A27E700F16CCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE981261A27E700F16CCB /* ViewController.swift */; };
@@ -104,6 +105,7 @@
 		5D895DE4262F3F95003FFF1D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5D895DE9262F4133003FFF1D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5D91D41C265A3B2C00C53E3B /* PostObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostObserver.swift; sourceTree = "<group>"; };
+		5D91D463265A461800C53E3B /* LogConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogConfig.swift; sourceTree = "<group>"; };
 		5DBAE97A261A27E700F16CCB /* InstagramFirestoreTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramFirestoreTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DBAE97D261A27E700F16CCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DBAE97F261A27E700F16CCB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				5DCEEA5426249F2300B220F6 /* AuthUseCase.swift */,
 				5D895DE4262F3F95003FFF1D /* Constants.swift */,
 				5D91D41C265A3B2C00C53E3B /* PostObserver.swift */,
+				5D91D463265A461800C53E3B /* LogConfig.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				5D786419264AE6DC00F986A7 /* Post.swift in Sources */,
 				5D7BC4ED261B73CB00426D53 /* FeedController.swift in Sources */,
 				5DEEEDC2261B6FAB00672FBA /* MainTabController.swift in Sources */,
+				5D91D464265A461800C53E3B /* LogConfig.swift in Sources */,
 				5DBAE980261A27E700F16CCB /* SceneDelegate.swift in Sources */,
 				5D02E29E26209B3F00551F66 /* LoginViewPresenter.swift in Sources */,
 				5DE8F9D6261C98A90097BE3E /* TabBarItemFactory.swift in Sources */,

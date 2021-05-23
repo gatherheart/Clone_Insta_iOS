@@ -23,7 +23,6 @@ class UploadPhotoViewController: UIViewController {
     var selectedImage: UIImage? {
         didSet {
             photoImageView.image = selectedImage
-            print(photoImageView.image)
         }
     }
     let maxLengthOfTextView: UInt = 100
@@ -54,7 +53,6 @@ class UploadPhotoViewController: UIViewController {
 
     init(photo: UIImage) {
         super.init(nibName: nil, bundle: nil)
-        print("selected ", photo)
         self.photoImageView.image = photo
     }
     
@@ -129,10 +127,9 @@ class UploadPhotoViewController: UIViewController {
             .subscribe { event in
                 switch event {
                 case .next(let data):
-                    print(data)
                     lastData = data
                 case .error(let error):
-                    print(error)
+                    InfoLog(error.localizedDescription)
                 case .completed:
                     self.delegate?.uploadPhotoViewController(self, didFinishUploading: lastData)
                     self.showLoader(false)

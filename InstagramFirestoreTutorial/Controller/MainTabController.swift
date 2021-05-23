@@ -70,7 +70,7 @@ extension MainTabController: AuthenticationDelegate {
         }
     }
     func didAuthenticationComplete() {
-        print("DEBUG: Auth did complete. Fetch user and update here...")
+        ErrorLog("[🤬]: Auth did complete. Fetch user and update here...")
         fetchUser()
         self.dismiss(animated: true, completion: nil)
     }

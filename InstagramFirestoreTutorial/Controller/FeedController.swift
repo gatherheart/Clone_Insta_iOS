@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Kingfisher
+import CocoaLumberjack
 
 class FeedController: UIViewController {
     
@@ -69,7 +70,7 @@ class FeedController: UIViewController {
                 guard let self = self, let cell: FeedCollectionViewCell = cell as? FeedCollectionViewCell else { return }
                 cell.configure(post: post)
                 let observation = post.observe(\.ownerImageUrl, options: [.new]) { post, change in
-                    print("NEW in observation", post, change)
+                    InfoLog("[🙀] NEW in observation \(String(describing: change.newValue))")
                     self.collectionView.reloadData()
                 }
                 self.observations.append(observation)

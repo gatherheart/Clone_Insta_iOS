@@ -23,7 +23,8 @@ target 'InstagramFirestoreTutorial' do
   pod 'Dwifft'
   pod 'RxSwift', '~> 6.2.0'
   pod 'RxCocoa', '~> 6.2.0'
-  
+  pod 'CocoaLumberjack'
+
   target 'InstagramFirestoreTutorialTests' do
     inherit! :search_paths
     # Pods for testing

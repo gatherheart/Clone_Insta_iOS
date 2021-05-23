@@ -219,6 +219,9 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.7):
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
+  - CocoaLumberjack (3.7.2):
+    - CocoaLumberjack/Core (= 3.7.2)
+  - CocoaLumberjack/Core (3.7.2)
   - Dwifft (0.9)
   - Firebase/Analytics (7.10.0):
     - Firebase/Core
@@ -383,6 +386,7 @@ PODS:
 
 DEPENDENCIES:
   - ActiveLabel
+  - CocoaLumberjack
   - Dwifft
   - Firebase/Analytics
   - Firebase/Auth
@@ -405,6 +409,7 @@ SPEC REPOS:
     - abseil
     - ActiveLabel
     - BoringSSL-GRPC
+    - CocoaLumberjack
     - Dwifft
     - Firebase
     - FirebaseAnalytics
@@ -442,6 +447,7 @@ SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
+  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
   Dwifft: 42912068ed2a8146077d1a1404df18625bd086e1
   Firebase: fffddd0bab8677d07376538365faa93ff3889b39
   FirebaseAnalytics: 4641d7ae4220174f6ca5626163ffc5de2e90391e
@@ -475,6 +481,6 @@ SPEC CHECKSUMS:
   SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
   YPImagePicker: 6f410f475bd22fa8cd430495b54d4b2f15865c2d
 
-PODFILE CHECKSUM: 168ae48f3c1656a761e4d5d37744f0ac83a049f3
+PODFILE CHECKSUM: e0e18aa666cb68cf1d2f7576a86c40e45e2aa391
 
 COCOAPODS: 1.10.1
