@@ -14,6 +14,7 @@ import CocoaLumberjack
 class FeedController: UIViewController {
     
     let disposeBag: DisposeBag = DisposeBag()
+    var user: User? = nil
     let viewModel = PostViewModel()
     var observations: [NSKeyValueObservation] = [NSKeyValueObservation]()
     
@@ -31,6 +32,12 @@ class FeedController: UIViewController {
         return cv
     }()
 
+    init(user: User) {
+        super.init(nibName: nil, bundle: nil)
+        self.user = user
+        commonInit()
+    }
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         commonInit()
@@ -50,7 +57,7 @@ class FeedController: UIViewController {
         self.view.backgroundColor = .green
         self.collectionView.refreshControl = self.refreshControl
         setupBindings()
-        viewModel.fetch()
+        viewModel.fetch(uid: user?.uid)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -60,17 +67,18 @@ class FeedController: UIViewController {
     }
     
     private func commonInit() {
-        navigationItem.title = "Feed"
         setCollectionView()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "logout",
+        if user == nil {
+            navigationItem.title = "Feed"
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "logout",
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(logout))
+        }
     }
     
     private func setupBindings() {
-        viewModel
-            .posts
+        viewModel.posts
             .observe(on: MainScheduler.instance)
             .bind(to: self.collectionView.rx.items(cellIdentifier: FeedCollectionViewCell.reuseIdentifier)) { [weak self] row, post, cell in
                 guard let self = self, let cell: FeedCollectionViewCell = cell as? FeedCollectionViewCell else { return }

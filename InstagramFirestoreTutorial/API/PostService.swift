@@ -75,6 +75,8 @@ struct PostService {
                     }
                     return post
                 }
+                observer.onNext(posts)
+                observer.onCompleted()
             }
             return Disposables.create()
         }

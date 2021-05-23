@@ -11,11 +11,12 @@ import RxSwift
 import RxCocoa
 
 class ProfileController: UIViewController {
-    var disposeBag: DisposeBag?
+    var disposeBag: DisposeBag = DisposeBag()
     var user: User? {
         didSet {
             InfoLog("Current Profile User \(user?.fullname) \(user?.email)")
             self.collectionView.reloadSections(IndexSet(integer: 0))
+            self.navigationItem.title = user?.username
         }
     }
     var posts: [Post] = [Post]()
@@ -60,16 +61,15 @@ class ProfileController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.diffCalculator = CollectionViewDiffCalculator(collectionView: collectionView, initialSectionedValues: sectionedValues())
+        setupBindings()
         checkFollow()
         fetchUserStats()
         fetchPosts()
         InfoLog("Current Profile User \(user?.fullname) \(user?.email) \(posts.count)")
-        disposeBag = DisposeBag()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        disposeBag = nil
     }
     
     func configureCollectionView() {
@@ -81,7 +81,6 @@ class ProfileController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         setCollectionView()
-        setupBindings()
     }
     
     private func setCollectionView() {
@@ -135,7 +134,7 @@ class ProfileController: UIViewController {
                 self.stuff = self.sectionedValues()
             }, onError: { Error in
                 ErrorLog("[🥶] Error in binding data")
-            }).disposed(by: disposeBag!)
+            }).disposed(by: disposeBag)
     }
     
     private func sectionedValues() -> SectionedValues<String, Post> {
@@ -147,7 +146,7 @@ class ProfileController: UIViewController {
 
 extension ProfileController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let feedVC: FeedController = FeedController()
+        let feedVC: FeedController = FeedController(user: user!)
         navigationController?.pushViewController(feedVC, animated: true)
     }
 }
