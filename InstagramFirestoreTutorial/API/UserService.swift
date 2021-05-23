@@ -17,9 +17,24 @@ struct UserService {
     }
     
     enum UserServiceError: Error {
+        case invalidUserId
         case currentUserAuthError
         case serverError
         case noSnapShotData
+    }
+    
+    static func fetchUser(uid: String? = nil) -> Promise<User> {
+        return Promise<User> { fulfill, reject in
+            guard let uid = uid else { reject(UserServiceError.invalidUserId); return }
+            FireBaseCollections.users.document(uid).getDocument { snapshot, error in
+                if let error = error {
+                    reject(error)
+                }
+                guard let dictionary = snapshot?.data() else { reject(UserServiceError.noSnapShotData); return }
+                let user = User(from: dictionary)
+                fulfill(user)
+            }
+        }
     }
     
     static func fetchUser() -> Promise<User> {

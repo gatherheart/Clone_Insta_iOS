@@ -168,6 +168,18 @@ class FeedCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(50)
         }
     }
+    
+    func configure(post: Post) {
+        print("configure", post)
+        if let source: URL = URL(string: post.imageUrl) {
+            self.postImage.kf.setImage(with: source)
+        }
+        if let source: URL = URL(string: post.ownerImageUrl) {
+            self.profileImage.kf.setImage(with: source)
+        }
+        username.setTitle(post.ownerUsername, for: .normal)
+    }
+    
     @objc func didTapUsername() {
         print("DEBUG: tapped username")
     }

@@ -208,3 +208,5 @@ struct NameDatabase: ItemStoring {
     typealias DataType = String
     var items = [String]()
 }
+
+let db: ItemStoring = NameDatabase()

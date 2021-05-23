@@ -16,6 +16,11 @@ class FeedController: UIViewController {
     let viewModel = PostViewModel()
     let posts = [Post]()
 
+    lazy private var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
+        return control
+    }()
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
@@ -38,6 +43,7 @@ class FeedController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .green
+        self.collectionView.refreshControl = self.refreshControl
         setupBindings()
         viewModel.fetch()
     }
@@ -57,8 +63,7 @@ class FeedController: UIViewController {
             .observe(on: MainScheduler.instance)
             .bind(to: self.collectionView.rx.items(cellIdentifier: FeedCollectionViewCell.reuseIdentifier)) { row, post, cell in
                 guard let cell: FeedCollectionViewCell = cell as? FeedCollectionViewCell else { return }
-                guard let source: URL = URL(string: post.imageUrl) else { return }
-                cell.postImage.kf.setImage(with: source)
+                cell.configure(post: post)
             }.disposed(by: disposeBag)
     }
     
@@ -84,6 +89,12 @@ class FeedController: UIViewController {
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         sender.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func refreshData() {
+        collectionView.reloadData()
+        refreshControl.endRefreshing()
     }
 }
 
