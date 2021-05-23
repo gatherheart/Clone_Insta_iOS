@@ -102,7 +102,7 @@ class FeedController: UIViewController {
     
     @objc
     private func refreshData() {
-        collectionView.reloadData()
+        viewModel.fetch()
         refreshControl.endRefreshing()
     }
 }

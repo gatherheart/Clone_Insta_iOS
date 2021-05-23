@@ -34,7 +34,7 @@ struct PostService {
     
     static func fetchPosts() -> Observable<[Post]> {
         return Observable<[Post]>.create { observer -> Disposable in
-            FireBaseCollections.posts.getDocuments { (snapshot, error) in
+            FireBaseCollections.posts.order(by: "timestamp", descending: true).getDocuments { (snapshot, error) in
                 guard let documents = snapshot?.documents else {
                     observer.onError(NSError(domain: "ERROR Fetch Post", code: 0, userInfo: nil))
                     return
