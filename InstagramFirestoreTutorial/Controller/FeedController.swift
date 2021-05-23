@@ -14,8 +14,8 @@ class FeedController: UIViewController {
     
     let disposeBag: DisposeBag = DisposeBag()
     let viewModel = PostViewModel()
-    let posts = [Post]()
-
+    var observations: [NSKeyValueObservation] = [NSKeyValueObservation]()
+    
     lazy private var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         control.addTarget(self, action: #selector(refreshData), for: UIControl.Event.valueChanged)
@@ -40,6 +40,10 @@ class FeedController: UIViewController {
         commonInit()
     }
     
+    deinit {
+        observations.removeAll()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .green
@@ -61,9 +65,14 @@ class FeedController: UIViewController {
         viewModel
             .posts
             .observe(on: MainScheduler.instance)
-            .bind(to: self.collectionView.rx.items(cellIdentifier: FeedCollectionViewCell.reuseIdentifier)) { row, post, cell in
-                guard let cell: FeedCollectionViewCell = cell as? FeedCollectionViewCell else { return }
+            .bind(to: self.collectionView.rx.items(cellIdentifier: FeedCollectionViewCell.reuseIdentifier)) { [weak self] row, post, cell in
+                guard let self = self, let cell: FeedCollectionViewCell = cell as? FeedCollectionViewCell else { return }
                 cell.configure(post: post)
+                let observation = post.observe(\.ownerImageUrl, options: [.new]) { post, change in
+                    print("NEW in observation", post, change)
+                    self.collectionView.reloadData()
+                }
+                self.observations.append(observation)
             }.disposed(by: disposeBag)
     }
     

@@ -30,6 +30,7 @@
 		5D895DE0262F3F5C003FFF1D /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D895DDF262F3F5C003FFF1D /* UserService.swift */; };
 		5D895DE5262F3F95003FFF1D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D895DE4262F3F95003FFF1D /* Constants.swift */; };
 		5D895DEA262F4133003FFF1D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D895DE9262F4133003FFF1D /* User.swift */; };
+		5D91D41D265A3B2C00C53E3B /* PostObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D91D41C265A3B2C00C53E3B /* PostObserver.swift */; };
 		5DBAE97E261A27E700F16CCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE97D261A27E700F16CCB /* AppDelegate.swift */; };
 		5DBAE980261A27E700F16CCB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE97F261A27E700F16CCB /* SceneDelegate.swift */; };
 		5DBAE982261A27E700F16CCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBAE981261A27E700F16CCB /* ViewController.swift */; };
@@ -102,6 +103,7 @@
 		5D895DDF262F3F5C003FFF1D /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		5D895DE4262F3F95003FFF1D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5D895DE9262F4133003FFF1D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5D91D41C265A3B2C00C53E3B /* PostObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostObserver.swift; sourceTree = "<group>"; };
 		5DBAE97A261A27E700F16CCB /* InstagramFirestoreTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramFirestoreTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DBAE97D261A27E700F16CCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DBAE97F261A27E700F16CCB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				5DC992B62629D34A0013CACB /* ImageUploader.swift */,
 				5DCEEA5426249F2300B220F6 /* AuthUseCase.swift */,
 				5D895DE4262F3F95003FFF1D /* Constants.swift */,
+				5D91D41C265A3B2C00C53E3B /* PostObserver.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				5D7BC4F2261B73E200426D53 /* SearchController.swift in Sources */,
 				5DBAE97E261A27E700F16CCB /* AppDelegate.swift in Sources */,
 				5DCEEA43262498C100B220F6 /* AuthRequest.swift in Sources */,
+				5D91D41D265A3B2C00C53E3B /* PostObserver.swift in Sources */,
 				5D60F0392644450900CFDD75 /* UploadPhotoViewController.swift in Sources */,
 				5D7BC501261B740700426D53 /* ProfileController.swift in Sources */,
 				5DC065B9261D8D6500397954 /* BackgroundFactory.swift in Sources */,

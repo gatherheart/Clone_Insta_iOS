@@ -41,13 +41,12 @@ struct PostService {
                 }
                 var posts: [Post] = documents.map { Post(postId: $0.documentID, dictionary: $0.data()) }
                 posts = posts.map { post in
-                    var _post = post
                     let userId = post.ownerUid
                     UserService.fetchUser(uid: userId).then { user in
-                        _post.ownerUsername = user.fullname
-                        _post.ownerImageUrl = user.profileImageUrl
+                        post.ownerUsername = user.fullname
+                        post.ownerImageUrl = user.profileImageUrl
                     }
-                    return _post
+                    return post
                 }
                 observer.onNext(posts)
                 observer.onCompleted()
