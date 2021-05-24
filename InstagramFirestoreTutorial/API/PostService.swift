@@ -60,7 +60,7 @@ struct PostService {
     static func fetchPosts(for uid: String?) -> Observable<[Post]> {
         guard let uid = uid else { return PostService.fetchPosts() }
         return Observable<[Post]>.create { observer -> Disposable in
-            let query: Query = FireBaseCollections.posts.whereField("ownerUid", isEqualTo: uid)
+            let query: Query = FireBaseCollections.posts.order(by: "timestamp", descending: true).whereField("ownerUid", isEqualTo: uid)
             
             query.getDocuments { (snapshot, error) in
                 guard let documents = snapshot?.documents else { return }

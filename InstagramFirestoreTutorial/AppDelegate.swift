@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        DDOSLogger.sharedInstance.logFormatter = LogFormatter()
         DDLog.add(DDOSLogger.sharedInstance)
         ImageCache.default.memoryStorage.config.totalCostLimit = 300 * 1024 * 1024
         return true
