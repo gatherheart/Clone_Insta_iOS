@@ -83,6 +83,11 @@ class FeedController: UIViewController {
             .bind(to: self.collectionView.rx.items(cellIdentifier: FeedCollectionViewCell.reuseIdentifier)) { [weak self] row, post, cell in
                 guard let self = self, let cell: FeedCollectionViewCell = cell as? FeedCollectionViewCell else { return }
                 cell.configure(post: post)
+                cell.didTapCommentBlock = { [weak self] in
+                    guard let self = self else { return }
+                    let vc = CommentController(collectionViewLayout: UICollectionViewFlowLayout())
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
                 let observation = post.observe(\.ownerImageUrl, options: [.new]) { post, change in
                     InfoLog("[🙀] NEW in observation \(String(describing: change.newValue))")
                     DispatchQueue.main.async {
@@ -91,6 +96,12 @@ class FeedController: UIViewController {
                 }
                 self.observations.append(observation)
             }.disposed(by: disposeBag)
+        
+        self.collectionView.rx.itemSelected
+            .subscribe { [weak self] indexPath in
+                guard let self = self else { return }
+            }.disposed(by: disposeBag)
+
     }
     
     private func setCollectionView() {
@@ -124,7 +135,7 @@ class FeedController: UIViewController {
     }
 }
 
-extension FeedController: UICollectionViewDelegate {
+extension FeedController {
 
 }
 

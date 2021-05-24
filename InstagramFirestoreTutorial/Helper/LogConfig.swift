@@ -7,7 +7,6 @@
 
 import Foundation
 import CocoaLumberjack
-import CocoaLumberjack.DDDispatchQueueLogFormatter
 
 class LogFormatter: DDDispatchQueueLogFormatter {
     let dateFormatter: DateFormatter

@@ -10,6 +10,7 @@ import SnapKit
 
 class FeedCollectionViewCell: UICollectionViewCell {
     public static let reuseIdentifier: String = "FeedCollectionViewCell"
+    typealias FeedClosureBlock = () -> Void
     
     private let profileImage: UIImageView = {
         let iv = UIImageView()
@@ -47,6 +48,7 @@ class FeedCollectionViewCell: UICollectionViewCell {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "comment"), for: .normal)
         button.tintColor = .black
+        button.addTarget(self, action: #selector(didTapComment), for: .touchUpInside)
         return button
     }()
     private lazy var share: UIButton = {
@@ -74,6 +76,9 @@ class FeedCollectionViewCell: UICollectionViewCell {
         label.textColor = .lightGray
         return label
     }()
+    
+    var didTapCommentBlock: FeedClosureBlock?
+    var didTapUsernameBlock: FeedClosureBlock?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -181,5 +186,11 @@ class FeedCollectionViewCell: UICollectionViewCell {
     
     @objc func didTapUsername() {
         InfoLog("DEBUG: tapped username")
+        didTapUsernameBlock?()
+    }
+    
+    @objc func didTapComment() {
+        InfoLog("DEBUG: tapped username")
+        didTapCommentBlock?()
     }
 }
