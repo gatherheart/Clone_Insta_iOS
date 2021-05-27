@@ -12,7 +12,7 @@ class CommentCell: UICollectionViewCell {
 
     static let identifier: String = "CommentCell"
     
-    private let profileImageView: UIImageView = {
+    let profileImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -39,6 +39,7 @@ class CommentCell: UICollectionViewCell {
     }
     
     private func commonInit() {
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(profileImageView)
         self.contentView.addSubview(commentLabel)
         
@@ -55,4 +56,13 @@ class CommentCell: UICollectionViewCell {
         }
     }
     
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        setNeedsLayout()
+        layoutIfNeeded()
+        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
+        var newFrame = layoutAttributes.frame
+//        newFrame.size.width = CGFloat(ceilf(Float(size.width)))
+        layoutAttributes.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 80)
+        return layoutAttributes
+    }
 }

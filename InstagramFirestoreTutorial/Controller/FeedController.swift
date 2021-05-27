@@ -85,7 +85,7 @@ class FeedController: UIViewController {
                 cell.configure(post: post)
                 cell.didTapCommentBlock = { [weak self] in
                     guard let self = self else { return }
-                    let vc = CommentController(collectionViewLayout: UICollectionViewFlowLayout())
+                    let vc = CommentController(post: post)
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 let observation = post.observe(\.ownerImageUrl, options: [.new]) { post, change in

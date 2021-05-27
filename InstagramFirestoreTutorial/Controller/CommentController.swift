@@ -9,6 +9,35 @@ import UIKit
 
 class CommentController: UICollectionViewController {
     
+    private var post: Post?
+    private var comments: [Comment] = []
+    private var commentInputView: CommentInputAccesoryView = {
+        let frame: CGRect = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50)
+        let inputView: CommentInputAccesoryView = CommentInputAccesoryView(frame: frame)
+        return inputView
+    }()
+    
+    override var inputAccessoryView: UIView? {
+        get {
+            return commentInputView
+        }
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    init(post: Post) {
+        self.post = post
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        layout.minimumLineSpacing = 10
+        layout.scrollDirection = .vertical
+        layout.sectionInset = .zero
+        super.init(collectionViewLayout: layout)
+        commonInit()
+    }
+    
     override init(collectionViewLayout: UICollectionViewLayout) {
         super.init(collectionViewLayout: collectionViewLayout)
         commonInit()
@@ -21,10 +50,14 @@ class CommentController: UICollectionViewController {
     
     private func commonInit() {
         self.setCollectionView()
+        self.collectionView.backgroundColor = .white
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.keyboardDismissMode = .onDrag
+        collectionView.alwaysBounceVertical = true
+        fetchComments()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,9 +72,17 @@ class CommentController: UICollectionViewController {
     
     private func setCollectionView() {
         self.navigationItem.title = "Comments"
-        collectionView.backgroundColor = .blue
         collectionView.register(CommentCell.self, forCellWithReuseIdentifier: CommentCell.identifier)
     }
+    
+    private func fetchComments() {
+        guard let post = post else { return }
+        CommentService.fetchComments(forPost: post.postId).then { comments in
+            self.comments = comments
+            self.collectionView.reloadData()
+        }
+    }
+
 }
 
 extension CommentController {
@@ -51,20 +92,16 @@ extension CommentController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return comments.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommentCell.identifier, for: indexPath) as? CommentCell else {
             return UICollectionViewCell()
         }
-        cell.backgroundColor = .red
         return cell
     }
 }
 
 extension CommentController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 80)
-    }
 }
