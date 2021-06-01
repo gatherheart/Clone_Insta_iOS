@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class CommentCell: UICollectionViewCell {
 
@@ -54,6 +55,13 @@ class CommentCell: UICollectionViewCell {
             make.left.equalTo(self.profileImageView.snp.right).offset(8)
             make.centerY.equalTo(self.profileImageView.snp.centerY)
         }
+    }
+        
+    func configure(comment: Comment) {
+        self.profileImageView.kf.setImage(with: URL(string: comment.profileImageUrl))
+        let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: "\(comment.username) ", attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedString.append(NSAttributedString(string: "\(comment.commentText)", attributes: [.font: UIFont.systemFont(ofSize: 14)]))
+        commentLabel.attributedText = attributedString
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {

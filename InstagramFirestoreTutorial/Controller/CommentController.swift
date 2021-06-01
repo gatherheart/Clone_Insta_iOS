@@ -100,6 +100,7 @@ extension CommentController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommentCell.identifier, for: indexPath) as? CommentCell else {
             return UICollectionViewCell()
         }
+        cell.configure(comment: comments[indexPath.row])
         return cell
     }
 }
