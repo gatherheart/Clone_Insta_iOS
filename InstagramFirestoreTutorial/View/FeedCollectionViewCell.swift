@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class FeedCollectionViewCell: UICollectionViewCell {
+    
+    private(set) weak var post: Post?
     public static let reuseIdentifier: String = "FeedCollectionViewCell"
     typealias FeedClosureBlock = () -> Void
     
@@ -42,6 +44,7 @@ class FeedCollectionViewCell: UICollectionViewCell {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "like_unselected"), for: .normal)
         button.tintColor = .black
+        button.addTarget(self, action: #selector(didTapLike), for: .touchUpInside)
         return button
     }()
     private lazy var comment: UIButton = {
@@ -79,7 +82,8 @@ class FeedCollectionViewCell: UICollectionViewCell {
     
     var didTapCommentBlock: FeedClosureBlock?
     var didTapUsernameBlock: FeedClosureBlock?
-    
+    var didTapLikeBlock: FeedClosureBlock?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -175,6 +179,7 @@ class FeedCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(post: Post) {
+        self.post = post
         if let source: URL = URL(string: post.imageUrl) {
             self.postImage.kf.setImage(with: source)
         }
@@ -182,6 +187,26 @@ class FeedCollectionViewCell: UICollectionViewCell {
             self.profileImage.kf.setImage(with: source)
         }
         username.setTitle(post.ownerUsername, for: .normal)
+    }
+    
+    func likeOrUnlike(_ isLiked: Bool) {
+        guard let post = post else { return }
+        if isLiked {
+            like.setImage(#imageLiteral(resourceName: "like_selected"), for: .normal)
+            likesLabel.text = "\(post.likes) likes"
+        } else {
+            like.setImage(#imageLiteral(resourceName: "like_unselected"), for: .normal)
+            likesLabel.text = "\(post.likes) likes"
+        }
+    }
+    
+    func updateLikesCount(with count: Int) {
+        likesLabel.text = "\(count) likes"
+    }
+    
+    @objc func didTapLike() {
+        InfoLog("DEBUG: tapped like")
+        didTapLikeBlock?()
     }
     
     @objc func didTapUsername() {

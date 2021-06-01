@@ -83,6 +83,36 @@ class FeedController: UIViewController {
             .bind(to: self.collectionView.rx.items(cellIdentifier: FeedCollectionViewCell.reuseIdentifier)) { [weak self] row, post, cell in
                 guard let self = self, let cell: FeedCollectionViewCell = cell as? FeedCollectionViewCell else { return }
                 cell.configure(post: post)
+                PostService.isLiked(postId: post.postId)
+                    .asObservable()
+                    .subscribe(onNext: { isLiked in
+                        cell.likeOrUnlike(isLiked)
+                        post.isLiked = isLiked
+                    }).disposed(by: self.disposeBag)
+                PostService.likes(postId: post.postId)
+                    .asObservable()
+                    .subscribe(onNext: { users in
+                        cell.updateLikesCount(with: users.count)
+                        post.likes = users.count
+                        InfoLog("post likes count \(users.count) == \(post.likes)")
+                    },
+                    onError: nil,
+                    onCompleted: nil,
+                    onDisposed: nil).disposed(by: self.disposeBag)
+                cell.didTapLikeBlock = { [weak self] in
+                    guard let self = self else { return }
+                    let likeOrUnlike: (String) -> Observable<Bool> = post.isLiked ? PostService.unlike : PostService.like
+                    likeOrUnlike(post.postId)
+                        .asObservable()
+                        .subscribe(onNext: { isLiked in
+                            post.likes += post.isLiked ? -1 : 1
+                            post.isLiked = isLiked
+                            cell.likeOrUnlike(isLiked)
+                        },
+                        onError: nil,
+                        onCompleted: nil,
+                        onDisposed: nil).disposed(by: self.disposeBag)
+                }
                 cell.didTapCommentBlock = { [weak self] in
                     guard let self = self else { return }
                     let vc = CommentController(post: post)

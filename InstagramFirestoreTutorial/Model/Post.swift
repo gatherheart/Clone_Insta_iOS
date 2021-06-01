@@ -10,6 +10,7 @@ import Firebase
 class Post: NSObject {
     var caption: String
     var likes: Int
+    var isLiked: Bool = false
     let imageUrl: String
     let ownerUid: String
     let timestamp: Timestamp

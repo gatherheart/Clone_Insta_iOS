@@ -13,4 +13,5 @@ struct FireBaseCollections {
     static let following = Firestore.firestore().collection("following")
     static let posts = Firestore.firestore().collection("posts")
     static let comments = Firestore.firestore().collection("comments")
+    static let likes = Firestore.firestore().collection("likes")
 }

@@ -7,9 +7,15 @@
 
 import UIKit
 import RxSwift
+import Promises
 import Firebase
 
 struct PostService {
+    
+    enum UserCollections: String {
+        case userWhoLike
+    }
+    
     static func uploadPost(caption: String, image: UIImage) -> Observable<PostData> {
         return Observable<PostData>.create { observer -> Disposable in
             guard let uid = Auth.auth().currentUser?.uid else {
@@ -82,4 +88,82 @@ struct PostService {
         }
     }
     
+    static func isLiked(postId: String) -> Observable<Bool> {
+        return Observable<Bool>.create { observer -> Disposable in
+            guard let myId = User.me?.uid else {
+                observer.onError(NSError(domain: "ERROR like post: no myId", code: 0, userInfo: nil))
+                return Disposables.create()
+            }
+            FireBaseCollections.likes.document(postId).collection(UserCollections.userWhoLike.rawValue).document(myId).getDocument { snapshot, error in
+                if snapshot?.exists == true {
+                    observer.onNext(true)
+                } else {
+                    observer.onNext(false)
+                }
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
+    
+    static func likes(postId: String) -> Observable<[User]> {
+        return Observable<[User]>.create { observer -> Disposable in
+            FireBaseCollections.likes.document(postId).collection(UserCollections.userWhoLike.rawValue).getDocuments { snapshot, error in
+                if let error = error {
+                    observer.onError(error)
+                    return
+                }
+                guard let documents = snapshot?.documents else {
+                    observer.onError(NSError(domain: "ERROR likes: no documents", code: 0, userInfo: nil))
+                    return
+                }
+                let userIds = documents.map { $0.documentID }
+                UserService.fetchUsers().then { users in
+                    let users = users.filter { userIds.contains($0.uid) }
+                    InfoLog("users who like this post: \(users)")
+                    observer.onNext(users)
+                    observer.onCompleted()
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    static func like(postId: String) -> Observable<Bool> {
+        return Observable<Bool>.create { observer -> Disposable in
+            guard let myId = User.me?.uid else {
+                observer.onError(NSError(domain: "ERROR like post: no myId", code: 0, userInfo: nil))
+                return Disposables.create()
+            }
+
+            FireBaseCollections.likes.document(postId).collection(UserCollections.userWhoLike.rawValue).document(myId).setData([:]) { error in
+                if let error = error {
+                    observer.onError(error)
+                } else {
+                    observer.onNext(true)
+                }
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
+    
+    static func unlike(postId: String) -> Observable<Bool> {
+        return Observable<Bool>.create { observer -> Disposable in
+            guard let myId = User.me?.uid else {
+                observer.onError(NSError(domain: "ERROR like post: no myId", code: 0, userInfo: nil))
+                return Disposables.create()
+            }
+
+            FireBaseCollections.likes.document(postId).collection(UserCollections.userWhoLike.rawValue).document(myId).delete() { error in
+                if let error = error {
+                    observer.onError(error)
+                } else {
+                    observer.onNext(false)
+                }
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
 }
