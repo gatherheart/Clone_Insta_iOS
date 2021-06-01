@@ -15,6 +15,17 @@ struct User: Hashable {
     let uid: String
     let identifier = UUID()
     var isFollowed: Bool = false
+    
+    static var _me: User?
+    static var me: User? {
+        if _me == nil {
+            UserService.fetchUser().then { user in
+                _me = user
+            }
+        }
+        return _me
+    }
+    
     var isMe: Bool {
         return UserService.isMe(uid: self.uid)
     }

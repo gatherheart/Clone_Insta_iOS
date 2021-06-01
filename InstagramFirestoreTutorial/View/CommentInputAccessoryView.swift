@@ -8,8 +8,17 @@
 import UIKit
 import SnapKit
 
+protocol CommentInputAccesoryViewDelegate: AnyObject {
+    func inputTextView(_ didComplete: CommentInputAccesoryView)
+}
+
 class CommentInputAccesoryView: UIView {
 
+    weak var delegate: CommentInputAccesoryViewDelegate?
+    var comment: String {
+        return commentTextView.text
+    }
+    
     private let divider: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .lightGray
@@ -76,6 +85,6 @@ class CommentInputAccesoryView: UIView {
     }
     
     @objc private func handleCommentUpload() {
-        
+        delegate?.inputTextView(self)
     }
 }

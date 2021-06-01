@@ -9,14 +9,14 @@ import Firebase
 import Promises
 
 struct CommentService {
-    static func uploadComment(comment: String, postID: String, user: User) -> Promise<Comment> {
+    static func uploadComment(comment: String, postId: String, user: User) -> Promise<Comment> {
         return Promise<Comment> { fulfill, reject in
             let data: [String: Any] = ["uid": user.uid,
                                        "comment": comment,
                                        "timestamp": Timestamp(date: Date()),
                                        "username": user.username,
                                        "profileImageUrl": user.profileImageUrl]
-            FireBaseCollections.posts.document(postID).collection("comments").addDocument(data: data) { error in
+            FireBaseCollections.posts.document(postId).collection("comments").addDocument(data: data) { error in
                 if let error = error {
                     reject(error)
                     return

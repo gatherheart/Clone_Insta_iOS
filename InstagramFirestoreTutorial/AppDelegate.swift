@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDOSLogger.sharedInstance.logFormatter = LogFormatter()
         DDLog.add(DDOSLogger.sharedInstance)
         ImageCache.default.memoryStorage.config.totalCostLimit = 300 * 1024 * 1024
+        let _ = User.me
         return true
     }
     

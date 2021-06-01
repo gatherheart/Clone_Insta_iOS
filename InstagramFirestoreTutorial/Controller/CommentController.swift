@@ -57,6 +57,7 @@ class CommentController: UICollectionViewController {
         super.viewDidLoad()
         collectionView.keyboardDismissMode = .onDrag
         collectionView.alwaysBounceVertical = true
+        commentInputView.delegate = self
         fetchComments()
     }
     
@@ -104,4 +105,14 @@ extension CommentController {
 }
 
 extension CommentController: UICollectionViewDelegateFlowLayout {
+}
+
+extension CommentController: CommentInputAccesoryViewDelegate {
+    func inputTextView(_ didComplete: CommentInputAccesoryView) {
+        guard let postId = self.post?.postId, let user = User.me else { return }
+        let comment = didComplete.comment
+        CommentService.uploadComment(comment: comment, postId: postId, user: user).then { _ in
+            self.collectionView.reloadData()
+        }
+    }
 }

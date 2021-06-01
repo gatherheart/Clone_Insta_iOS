@@ -150,6 +150,9 @@ class UploadPhotoViewController: UIViewController {
 }
 
 extension UploadPhotoViewController: InputTextViewDelegate {
+    func inputTextView(_ didComplete: UITextView) {
+    }
+    
     private func checkMaxLength(_ textView: UITextView) {
         if textView.text.count > maxLengthOfTextView {
             textView.deleteBackward()
